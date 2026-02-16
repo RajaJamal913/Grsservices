@@ -1,0 +1,542 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Muhammad Jamal Raja — Full Stack Developer</title>
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Fonts Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- AOS (animate on scroll) -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(180deg, #071025 0%, #0b1220 100%);
+      color: #e6eef6;
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+
+    .portfolio-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    :root {
+      --bg: #0f1724;
+      --card: #0b1220;
+      --muted: #9aa4b2;
+      --accent: #1e88e5;
+      --accent-light: #4fb2ff;
+      --glass: rgba(255,255,255,0.03);
+      --radius: 16px;
+    }
+
+    /* Cards */
+    .section-card {
+      background: linear-gradient(145deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+      border: 1px solid rgba(255,255,255,0.03);
+      backdrop-filter: blur(2px);
+      transition: transform 0.2s;
+    }
+    .section-card:hover {
+      border-color: rgba(30,136,229,0.3);
+      box-shadow: 0 20px 40px rgba(30,136,229,0.15);
+    }
+
+    h1, h2, h3 {
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      line-height: 1.1;
+      background: linear-gradient(135deg, #fff, var(--accent-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      display: inline-block;
+    }
+    h2:after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    .text-muted {
+      color: var(--muted) !important;
+    }
+
+    .accent-text {
+      color: var(--accent);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 24px;
+      border-radius: 40px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      color: white;
+      box-shadow: 0 8px 20px rgba(30,136,229,0.3);
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(30,136,229,0.5);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #fff;
+    }
+    .btn-outline:hover {
+      border-color: var(--accent);
+      background: rgba(30,136,229,0.1);
+      transform: translateY(-2px);
+    }
+
+    /* Header */
+    .header-card {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .contact-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.8rem;
+      margin-top: 1.2rem;
+    }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+    .contact-item i {
+      color: var(--accent);
+      font-size: 1.2rem;
+    }
+
+    /* Grid layouts */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.8rem;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.8rem;
+    }
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    /* Experience / Project cards */
+    .exp-card, .project-card {
+      background: var(--glass);
+      padding: 1.8rem;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.02);
+      transition: all 0.25s;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .exp-card:hover, .project-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(30,136,229,0.4);
+      box-shadow: 0 15px 30px rgba(30,136,229,0.15);
+    }
+    .exp-card h3, .project-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+    .exp-date {
+      color: var(--accent);
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 0.8rem;
+    }
+    .exp-desc {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+      flex: 1;
+    }
+    .chip {
+      background: rgba(255,255,255,0.04);
+      color: #dbeeff;
+      padding: 4px 12px;
+      border-radius: 40px;
+      font-size: 0.75rem;
+      border: 1px solid rgba(255,255,255,0.03);
+      display: inline-block;
+      margin: 0 4px 4px 0;
+    }
+    .skill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.5rem;
+    }
+
+    /* Project image */
+    .project-image {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      border: 1px solid rgba(255,255,255,0.05);
+      transition: transform 0.3s;
+    }
+    .project-card:hover .project-image {
+      transform: scale(1.02);
+    }
+
+    /* Stats row (for AI resume) */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0 1rem;
+    }
+    .stat-item {
+      background: var(--card);
+      padding: 1.2rem;
+      border-radius: 16px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.03);
+    }
+    .stat-number {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    /* Languages */
+    .lang-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .lang-item:last-child {
+      border-bottom: none;
+    }
+    .lang-name {
+      font-weight: 500;
+    }
+    .lang-level {
+      color: var(--muted);
+    }
+
+    /* Footer */
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding-top: 2rem;
+      margin-top: 2rem;
+    }
+    .social-links a {
+      color: var(--muted);
+      margin-left: 1rem;
+      font-size: 1.3rem;
+      transition: color 0.2s;
+    }
+    .social-links a:hover {
+      color: var(--accent);
+    }
+
+    /* Responsive */
+    @media (max-width: 800px) {
+      .grid-2, .grid-3 {
+        grid-template-columns: 1fr;
+      }
+      h1 { font-size: 2.2rem; }
+      .portfolio-wrap { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="portfolio-wrap">
+
+    <!-- Header -->
+    <div class="section-card" data-aos="fade-down">
+      <div class="header-card">
+        <div>
+          <h1>Muhammad Jamal Raja</h1>
+          <p style="font-size: 1.3rem; color: var(--accent); margin-top: 0.2rem;">Full Stack Developer</p>
+        </div>
+        <div>
+          <a href="https://github.com/RajaJamal913/" class="btn btn-outline" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+        </div>
+      </div>
+      <div class="contact-bar">
+        <span class="contact-item"><i class="fas fa-envelope"></i> m.jamalraja436@gmail.com</span>
+        <span class="contact-item"><i class="fas fa-phone-alt"></i> +92 311 3925176</span>
+        <span class="contact-item"><i class="fas fa-map-marker-alt"></i> Islamabad, Pakistan</span>
+      </div>
+    </div>
+
+    <!-- Profile -->
+    <section class="section-card" data-aos="fade-up">
+      <h2>Profile</h2>
+      <p class="text-muted" style="font-size: 1.1rem; max-width: 900px;">
+        Dedicated and results-driven software engineer with over 3 years of experience building full‑stack web applications. 
+        I excel in collaborative environments and continuously seek opportunities to enhance my expertise. 
+        With a strong commitment to innovation and excellence, I develop high‑quality applications that exceed user expectations.
+      </p>
+    </section>
+
+    <!-- Education & Languages -->
+    <div class="grid-2" data-aos="fade-up">
+      <div class="section-card">
+        <h2>Education</h2>
+        <div style="margin-top: 1rem;">
+          <h3 style="font-size: 1.3rem;">Bachelors of Computer Science</h3>
+          <p class="accent-text">COMSATS WAH · 02/2019 – 02/2023</p>
+        </div>
+      </div>
+      <div class="section-card">
+        <h2>Languages</h2>
+        <div style="margin-top: 1rem;">
+          <div class="lang-item"><span class="lang-name">English</span><span class="lang-level">Full Professional Proficiency</span></div>
+          <div class="lang-item"><span class="lang-name">Urdu</span><span class="lang-level">Full Professional Proficiency</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Work Experience -->
+    <section data-aos="fade-up">
+      <h2>Work Experience</h2>
+      <div class="grid-2" style="margin-top: 1rem;">
+        <div class="exp-card">
+          <h3>Full Stack Developer · Django & Next.js</h3>
+          <div class="exp-date">04/2023 – 01/2024</div>
+          <p class="exp-desc">
+            • Developed a feature‑rich eCommerce platform with product catalog, shopping cart, Stripe payments, order management, and an admin dashboard.<br>
+            • Engineered a real‑time Employee Task & Project Tracker using Django and Next.js, enabling instant updates and collaboration without page refreshes.
+          </p>
+          <div class="skill-list">
+            <span class="chip">Django</span><span class="chip">Next.js</span><span class="chip">Stripe</span><span class="chip">Real-time</span>
+          </div>
+        </div>
+        <div class="exp-card">
+          <h3>BackEnd Developer · Django, Bootstrap</h3>
+          <div class="exp-date">05/2021 – 02/2023</div>
+          <p class="exp-desc">
+            • Built a live streaming platform with dual admin/client panels, AWS S3 storage for media, and Stripe subscriptions.<br>
+            • Integrated FFmpeg with Django to create a real‑time streaming dashboard; designed responsive UI with Bootstrap.
+          </p>
+          <div class="skill-list">
+            <span class="chip">Django</span><span class="chip">AWS S3</span><span class="chip">FFmpeg</span><span class="chip">Stripe</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Projects (with detailed descriptions, GitHub links only) -->
+    <section data-aos="fade-up">
+      <h2>Featured Projects</h2>
+      <div class="project-grid">
+        <!-- TechFlow -->
+        <div class="project-card">
+          <img src="{% static 'img/techflow.png' %}" alt="TechFlow Dashboard" class="project-image" onerror="this.src='https://via.placeholder.com/340x180/0b1220/1e88e5?text=TechFlow'">
+          <h3>TechFlow — Project Management System</h3>
+          <p class="exp-desc">
+            A comprehensive project management solution that centralizes sprints, standups, code reviews, and workloads. 
+            Features smart dashboards with real‑time visibility into progress and overdue tasks, plus an AI‑powered agent for proactive reminders and workflow optimization.
+          </p>
+          <div class="skill-list">
+            <span class="chip">React</span><span class="chip">Django</span><span class="chip">AI</span><span class="chip">Real-time</span>
+          </div>
+          <div style="margin-top: 1rem;">
+            <a href="https://github.com/RajaJamal913/" class="btn btn-primary" style="padding: 8px 20px;" target="_blank"><i class="fab fa-github"></i> View Code</a>
+          </div>
+        </div>
+        <!-- AI Resume Analyzer -->
+        <div class="project-card">
+          <img src="{% static 'img/airesume.png' %}" alt="AI Resume Analyzer" class="project-image" onerror="this.src='https://via.placeholder.com/340x180/0b1220/1e88e5?text=AI+Resume'">
+          <h3>AI Resume Analyzer – Smarter Hiring</h3>
+          <p class="exp-desc">
+            An intelligent ATS that parses and ranks resumes using NLP. Automatically extracts keywords, shortlists candidates, and provides real‑time pipeline visibility. 
+            Achieves 94% parsing accuracy and includes role coverage analysis for better hiring alignment.
+          </p>
+          <div class="skill-list">
+            <span class="chip">Python</span><span class="chip">spaCy</span><span class="chip">Django</span><span class="chip">Vue.js</span>
+          </div>
+          <div style="margin-top: 1rem;">
+            <a href="https://github.com/RajaJamal913/" class="btn btn-primary" style="padding: 8px 20px;" target="_blank"><i class="fab fa-github"></i> View Code</a>
+          </div>
+        </div>
+        <!-- SmartBot AI (Kora) -->
+        <div class="project-card">
+          <img src="{% static 'img/chatbot.png' %}" alt="SmartBot AI Kora" class="project-image" onerror="this.src='https://via.placeholder.com/340x180/0b1220/1e88e5?text=Kora+AI'">
+          <h3>SmartBot AI (Kora) – Conversational Prototype</h3>
+          <p class="exp-desc">
+            A proof‑of‑concept AI assistant built with Rasa and Python. Demonstrates how custom‑trained NLP can handle domain‑specific queries for support, education, and internal knowledge. 
+            Includes personalized prompts and context‑aware responses.
+          </p>
+          <div class="skill-list">
+            <span class="chip">NLP</span><span class="chip">Rasa</span><span class="chip">Python</span><span class="chip">LLM</span>
+          </div>
+          <div style="margin-top: 1rem;">
+            <a href="https://github.com/RajaJamal913/" class="btn btn-primary" style="padding: 8px 20px;" target="_blank"><i class="fab fa-github"></i> View Code</a>
+          </div>
+        </div>
+        <!-- E-Housing (Real Estate) -->
+        <div class="project-card">
+          <img src="{% static 'img/property.png' %}" alt="E-Housing Dashboard" class="project-image" onerror="this.src='https://via.placeholder.com/340x180/0b1220/1e88e5?text=E-Housing'">
+          <h3>E-Housing – Real Estate Management</h3>
+          <p class="exp-desc">
+            A unified platform for property agents that centralizes user management, transactions, and insights. 
+            Tracks active users, click events, payments, orders, and engagement (likes/reviews). Includes project budget monitoring and progress reports.
+          </p>
+          <div class="skill-list">
+            <span class="chip">Django</span><span class="chip">PostgreSQL</span><span class="chip">Mapbox</span><span class="chip">Real-time</span>
+          </div>
+          <div style="margin-top: 1rem;">
+            <a href="https://github.com/RajaJamal913/" class="btn btn-primary" style="padding: 8px 20px;" target="_blank"><i class="fab fa-github"></i> View Code</a>
+          </div>
+        </div>
+        <!-- Live Stream Management System -->
+        <div class="project-card">
+          <img src="{% static 'img/webstream.png' %}" alt="Live Stream Dashboard" class="project-image" onerror="this.src='https://via.placeholder.com/340x180/0b1220/1e88e5?text=Live+Stream'">
+          <h3>Live Stream Management System</h3>
+          <p class="exp-desc">
+            A complete solution for creators and businesses to manage live streams from a central dashboard. 
+            Features stream creation/activation/deletion, live preview, and an analytics dashboard showing earnings (daily/monthly/yearly) and viewer statistics.
+          </p>
+          <div class="skill-list">
+            <span class="chip">WebRTC</span><span class="chip">FFmpeg</span><span class="chip">Django</span><span class="chip">AWS S3</span><span class="chip">Stripe</span>
+          </div>
+          <div style="margin-top: 1rem;">
+            <a href="https://github.com/RajaJamal913/" class="btn btn-primary" style="padding: 8px 20px;" target="_blank"><i class="fab fa-github"></i> View Code</a>
+          </div>
+        </div>
+        <!-- Personal Projects (BARCA FIRM / Synergy Path / GRS Services) -->
+        <div class="project-card">
+          <img src="{% static 'img/brca.png' %}" alt="WebWiz Projects" class="project-image" onerror="this.src='https://via.placeholder.com/340x180/0b1220/1e88e5?text=Web+Projects'">
+          <h3>BARCA FIRM · Synergy Path · GRS Services</h3>
+          <p class="exp-desc">
+            Developed and deployed multiple live websites using Django, HTML, and CSS. 
+            <a href="http://www.brcafirm.com" target="_blank">brcafirm.com</a>, 
+            <a href="http://www.synergypath.co" target="_blank">synergypath.co</a>, and 
+            <a href="http://www.grsservices.co" target="_blank">grsservices.co</a> 
+            feature secure authentication, responsive design, and are hosted on PythonAnywhere.
+          </p>
+          <div class="skill-list">
+            <span class="chip">Django</span><span class="chip">HTML/CSS</span><span class="chip">PythonAnywhere</span>
+          </div>
+          <div style="margin-top: 1rem;">
+            <a href="https://github.com/RajaJamal913/" class="btn btn-primary" style="padding: 8px 20px;" target="_blank"><i class="fab fa-github"></i> View Code</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills & Interests -->
+    <div class="grid-3" data-aos="fade-up">
+      <div class="section-card">
+        <h2>Soft Skills</h2>
+        <div class="skill-list">
+          <span class="chip">Collaboration</span><span class="chip">Problem Solving</span><span class="chip">Innovation</span>
+          <span class="chip">Adaptability</span><span class="chip">Communication</span><span class="chip">Team Leadership</span>
+        </div>
+      </div>
+      <div class="section-card">
+        <h2>Technical Toolkit</h2>
+        <div class="skill-list">
+          <span class="chip">Python/Django</span><span class="chip">Next.js</span><span class="chip">React</span>
+          <span class="chip">REST APIs</span><span class="chip">PostgreSQL</span><span class="chip">AWS</span>
+          <span class="chip">Docker</span><span class="chip">Git</span>
+        </div>
+      </div>
+      <div class="section-card">
+        <h2>Interests</h2>
+        <div class="skill-list">
+          <span class="chip">Building Apps</span><span class="chip">New Tech</span><span class="chip">Cricket</span>
+          <span class="chip">Trading</span><span class="chip">Forex</span><span class="chip">SMC</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Organizations -->
+    <div class="section-card" data-aos="fade-up">
+      <h2>Organizations</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 1rem; margin-top: 1rem;">
+        <div><strong>Full Stack Developer</strong> · 02/2024 – Present<br><span class="text-muted">Cannary Labs · Axiom Applications · Excel Add‑ins</span></div>
+        <div><strong>Backend Django Developer</strong> · 04/2023 – 01/2024<br><span class="text-muted">(previous contract role)</span></div>
+        <div><strong>Web Developer</strong> · 05/2021 – 02/2023<br><span class="text-muted">Freelance & Personal Projects</span></div>
+      </div>
+    </div>
+
+    <!-- Footer with GitHub link -->
+    <footer class="footer">
+      <span>© 2025 Muhammad Jamal Raja — Full Stack Developer</span>
+      <div class="social-links">
+        <a href="https://github.com/RajaJamal913/" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/jamal-raja-4851293b1/" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- AOS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>AOS.init({ duration: 800, once: true });</script>
+</body>
+</html>

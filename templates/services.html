@@ -1,114 +1,280 @@
 {% extends 'templates/base.html' %}
 {% load static %}
 {% block content %}
-<div class="container mt-5">
-  <!-- Page Banner -->
-  <div class="page-banner" style="background-image: url('{% static 'img/img_bg_1.jpg' %}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-    <div class="row justify-content-center align-items-center h-100">
-      <div class="col-md-6">
+<!-- Add AOS & Font Awesome in base template or here (if not already present) -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+  /* Custom enhancements */
+  .page-banner {
+    position: relative;
+    background-attachment: fixed; /* subtle parallax */
+    border-radius: 0 0 50px 50px;
+    overflow: hidden;
+  }
+  .page-banner .overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+  }
+  .page-banner .row {
+    position: relative;
+    z-index: 2;
+    min-height: 300px;
+  }
+  .page-banner h1 {
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    font-size: 3rem;
+    font-weight: 700;
+  }
+  .breadcrumb-item a, .breadcrumb-item.active {
+    color: #f8f9fa !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  }
+  .service-card {
+    transition: all 0.3s ease-in-out;
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    background: white;
+  }
+  .service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 30px rgba(0,123,255,0.2) !important;
+  }
+  .service-card i {
+    transition: transform 0.3s ease;
+  }
+  .service-card:hover i {
+    transform: scale(1.2) rotate(5deg);
+    color: #0056b3 !important;
+  }
+  .service-icon {
+    height: 80px;
+    width: 80px;
+    line-height: 80px;
+    border-radius: 50%;
+    background: rgba(0,123,255,0.1);
+    margin: 0 auto 1.5rem;
+    transition: background 0.3s;
+  }
+  .service-card:hover .service-icon {
+    background: rgba(0,123,255,0.2);
+  }
+  .service-link-card {
+    text-decoration: none !important;
+    color: inherit !important;
+    display: block;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.3s;
+    background: white;
+    border: 1px solid rgba(0,0,0,0.05);
+  }
+  .service-link-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+  }
+  .service-link-card img {
+    transition: transform 0.5s ease;
+    height: 220px;
+    object-fit: cover;
+  }
+  .service-link-card:hover img {
+    transform: scale(1.05);
+  }
+  .service-link-card .card-content {
+    padding: 1.5rem 1rem;
+  }
+  .service-link-card h5 i {
+    margin-right: 8px;
+    font-size: 1.2rem;
+  }
+  .section-title {
+    position: relative;
+    margin-bottom: 3rem;
+  }
+  .section-title h2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    display: inline-block;
+    background: linear-gradient(45deg, #007bff, #00d4ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .section-title p {
+    font-size: 1.2rem;
+    color: #6c757d;
+  }
+  .bg-soft-light {
+    background: #f8faff;
+  }
+  /* AOS custom */
+  [data-aos] {
+    pointer-events: none;
+  }
+  [data-aos].aos-animate {
+    pointer-events: auto;
+  }
+</style>
+
+<div class="container-fluid px-0">
+  <!-- Page Banner with overlay -->
+  <div class="page-banner" style="background-image: url('{% static 'img/ser2.avif' %}'); background-size: cover; background-position: center;">
+    <div class="overlay"></div>
+    <div class="row justify-content-center align-items-center text-center" style="min-height: 350px;">
+      <div class="col-md-8" data-aos="fade-down">
         <nav aria-label="breadcrumb">
           <ul class="breadcrumb justify-content-center py-0 bg-transparent">
-            <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
-            <li class="breadcrumb-item active">Services</li>
+            <li class="breadcrumb-item"><a href="{% url 'index' %}" class="text-white"><i class="fas fa-home me-2"></i>Home</a></li>
+            <li class="breadcrumb-item active text-white" aria-current="page">Services</li>
           </ul>
         </nav>
-        <h1 class="text-center">Our Services</h1>
+        <h1 class="display-4 fw-bold">Our Services</h1>
+        <p class="lead text-white">Innovative solutions tailored for your success</p>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Services Section -->
-<section class="container py-5">
-  <div class="row text-center mb-4">
-    <div class="col">
-      <h2>What We Offer</h2>
-      <p class="text-muted">Providing efficient, secure, and innovative solutions for your business needs.</p>
-    </div>
+<!-- Main Services Section -->
+<section class="container py-5 my-5">
+  <div class="section-title text-center" data-aos="fade-up">
+    <h2>What We Offer</h2>
+    <p class="text-muted">Delivering excellence through technology and expertise</p>
   </div>
 
-  <div class="row">
-    <!-- Service Cards -->
-    <div class="col-md-4">
-      <div class="card shadow-sm text-center p-4">
-        <div class="service-icon mb-3">
-          <i class="icon-layers" style="font-size: 40px; color: #007bff;"></i>
+  <div class="row g-4">
+    <!-- Service Cards (first row) -->
+    <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+      <div class="service-card card shadow-sm text-center p-4 h-100">
+        <div class="service-icon">
+          <i class="fas fa-hospital-user fa-3x" style="color: #007bff;"></i>
         </div>
         <h4>Healthcare Administration</h4>
-        <p>We streamline scheduling, billing, and patient management, enabling providers to focus on patient care.</p>
+        <p class="text-muted">Streamline scheduling, billing, and patient management for better care.</p>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="card shadow-sm text-center p-4">
-        <div class="service-icon mb-3">
-          <i class="icon-rocket" style="font-size: 40px; color: #007bff;"></i>
+    <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+      <div class="service-card card shadow-sm text-center p-4 h-100">
+        <div class="service-icon">
+          <i class="fas fa-microchip fa-3x" style="color: #007bff;"></i>
         </div>
         <h4>Technology Integration</h4>
-        <p>Enhancing efficiency through automation, AI-driven solutions, and secure data management practices.</p>
+        <p class="text-muted">Automation, AI, and secure data management to boost efficiency.</p>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="card shadow-sm text-center p-4">
-        <div class="service-icon mb-3">
-          <i class="icon-users" style="font-size: 40px; color: #007bff;"></i>
+    <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+      <div class="service-card card shadow-sm text-center p-4 h-100">
+        <div class="service-icon">
+          <i class="fas fa-handshake fa-3x" style="color: #007bff;"></i>
         </div>
         <h4>Outsourcing Solutions</h4>
-        <p>Our team of experts handles essential tasks, reducing workload and improving operational efficiency.</p>
+        <p class="text-muted">Expert task management to reduce workload and improve operations.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section style="padding: 50px 15px; background-color: #f9f9f9;">
+<!-- Detailed Services Grid -->
+<section class="py-5 bg-soft-light">
   <div class="container">
+    <div class="section-title text-center" data-aos="fade-up">
+      <h2>Explore Our Expertise</h2>
+      <p class="text-muted">Comprehensive solutions across industries</p>
+    </div>
+
     <div class="row g-4">
-      <!-- Additional Service Sections -->
-      <div class="col-md-4">
-        <div class="text-center" style="border: 1px solid #ddd; border-radius: 8px; padding: 20px; transition: transform 0.3s ease;">
-          <img src="{% static 'img/aboutcall.jpg' %}" alt="Call Center" style="border-radius: 8px; height: 200px; width: 100%; object-fit: cover;">
-          <h5 class="mt-3 font-weight-bold"><i class="fas fa-user-clock text-primary"></i> Call Center</h5>
-          <p>Professional support for customer service, appointment scheduling, and emergency assistance.</p>
-        </div>
+      <!-- Call Center -->
+      <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+        <a href="{% url 'callcenter' %}" class="service-link-card">
+          <img src="{% static 'img/cc.avif' %}" alt="Call Center" class="img-fluid w-100">
+          <div class="card-content">
+            <h5 class="fw-bold"><i class="fas fa-headset text-primary"></i> Call Center</h5>
+            <p class="text-muted mb-0">24/7 customer support, scheduling & emergency assistance.</p>
+          </div>
+        </a>
       </div>
-      <div class="col-md-4">
-        <div class="text-center" style="border: 1px solid #ddd; border-radius: 8px; padding: 20px; transition: transform 0.3s ease;">
-          <img src="{% static 'img/soft.jpg' %}" alt="Software Development" style="border-radius: 8px; height: 200px; width: 100%; object-fit: cover;">
-          <h5 class="mt-3 font-weight-bold"><i class="fas fa-code text-danger"></i> Software Development</h5>
-          <p>Custom healthcare solutions, including EMR, patient portals, and automation tools.</p>
-        </div>
+      <!-- Software Development -->
+      <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+        <a href="{% url 'softwaredevelopment' %}" class="service-link-card">
+          <img src="{% static 'img/software1.avif' %}" alt="Software Development" class="img-fluid w-100">
+          <div class="card-content">
+            <h5 class="fw-bold"><i class="fas fa-code text-primary"></i> Software Development</h5>
+            <p class="text-muted mb-0">Custom EMR, patient portals, and automation tools.</p>
+          </div>
+        </a>
       </div>
-      <div class="col-md-4">
-        <div class="text-center" style="border: 1px solid #ddd; border-radius: 8px; padding: 20px; transition: transform 0.3s ease;">
-          <img src="{% static 'img/digital.jpg' %}" alt="Digital Marketing" style="border-radius: 8px; height: 200px; width: 100%; object-fit: cover;">
-          <h5 class="mt-3 font-weight-bold"><i class="fas fa-bullhorn text-danger"></i> Digital Marketing</h5>
-          <p>SEO, social media management, and targeted advertising for business growth.</p>
-        </div>
+      <!-- Digital Marketing -->
+      <div class="col-md-4" data-aos="zoom-in" data-aos-delay="300">
+        <a href="{% url 'digitalmarketing' %}" class="service-link-card">
+          <img src="{% static 'img/boz.avif' %}" alt="Digital Marketing" class="img-fluid w-100">
+          <div class="card-content">
+            <h5 class="fw-bold"><i class="fas fa-chart-line text-primary"></i> Digital Marketing</h5>
+            <p class="text-muted mb-0">SEO, social media, and targeted ad campaigns.</p>
+          </div>
+        </a>
       </div>
     </div>
 
-    <div class="row g-4 mt-4">
-      <div class="col-md-4">
-        <div class="text-center" style="border: 1px solid #ddd; border-radius: 8px; padding: 20px; transition: transform 0.3s ease;">
-          <img src="{% static 'img/med.webp' %}" alt="Medical Billing" style="border-radius: 8px; height: 200px; width: 100%; object-fit: cover;">
-          <h5 class="mt-3 font-weight-bold"><i class="fas fa-file-invoice-dollar text-danger"></i> Medical Billing</h5>
-          <p>Insurance claims, payment processing, and revenue cycle management.</p>
-        </div>
+    <div class="row g-4 mt-2">
+      <!-- Medical Billing -->
+      <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+        <a href="{% url 'medicalbilling' %}" class="service-link-card">
+          <img src="{% static 'img/med.webp' %}" alt="Medical Billing" class="img-fluid w-100">
+          <div class="card-content">
+            <h5 class="fw-bold"><i class="fas fa-file-invoice-dollar text-primary"></i> Medical Billing</h5>
+            <p class="text-muted mb-0">Insurance claims, payment processing & revenue cycle.</p>
+          </div>
+        </a>
       </div>
-      <div class="col-md-4">
-        <div class="text-center" style="border: 1px solid #ddd; border-radius: 8px; padding: 20px; transition: transform 0.3s ease;">
-          <img src="{% static 'img/content.jpg' %}" alt="Content Writing" style="border-radius: 8px; height: 200px; width: 100%; object-fit: cover;">
-          <h5 class="mt-3 font-weight-bold"><i class="fas fa-pen-fancy text-danger"></i> Content Writing</h5>
-          <p>SEO-optimized articles, blog posts, and marketing content.</p>
-        </div>
+      <!-- Content Writing -->
+      <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+        <a href="{% url 'contentwriting' %}" class="service-link-card">
+          <img src="{% static 'img/content.jpg' %}" alt="Content Writing" class="img-fluid w-100">
+          <div class="card-content">
+            <h5 class="fw-bold"><i class="fas fa-pen-fancy text-primary"></i> Content Writing</h5>
+            <p class="text-muted mb-0">SEO articles, blogs, and compelling copy.</p>
+          </div>
+        </a>
       </div>
-      <div class="col-md-4">
-        <div class="text-center" style="border: 1px solid #ddd; border-radius: 8px; padding: 20px; transition: transform 0.3s ease;">
-          <img src="{% static 'img/it.jpg' %}" alt="IT Consultancy" style="border-radius: 8px; height: 200px; width: 100%; object-fit: cover;">
-          <h5 class="mt-3 font-weight-bold"><i class="fas fa-laptop-code text-danger"></i> IT Consultancy</h5>
-          <p>System integration, cybersecurity, and digital transformation strategies.</p>
-        </div>
+      <!-- IT Consultancy -->
+      <div class="col-md-4" data-aos="zoom-in" data-aos-delay="300">
+        <a href="{% url 'itconsultancy' %}" class="service-link-card">
+          <img src="{% static 'img/it.jpg' %}" alt="IT Consultancy" class="img-fluid w-100">
+          <div class="card-content">
+            <h5 class="fw-bold"><i class="fas fa-network-wired text-primary"></i> IT Consultancy</h5>
+            <p class="text-muted mb-0">Cybersecurity, system integration & digital transformation.</p>
+          </div>
+        </a>
       </div>
     </div>
   </div>
 </section>
+
+<!-- Call to Action -->
+<section class="container py-5 my-5 text-center" data-aos="fade-up">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h3 class="fw-bold">Ready to transform your business?</h3>
+      <p class="lead text-muted">Let’s discuss how our services can drive your success.</p>
+      <a href="{% url 'contact' %}" class="btn btn-primary btn-lg px-5 py-3 mt-3 rounded-pill shadow-lg">
+        <i class="fas fa-calendar-check me-2"></i>Schedule a Consultation
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- AOS initialization -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 800,
+    easing: 'ease-in-out',
+    once: true,
+    mirror: false
+  });
+</script>
 {% endblock %}

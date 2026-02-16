@@ -1,0 +1,512 @@
+{% extends 'templates/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Add AOS & Font Awesome (if not already in base) -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+  /* Global enhancements */
+  .page-banner {
+    position: relative;
+    background-attachment: fixed;
+    border-radius: 0 0 50px 50px;
+    overflow: hidden;
+    padding: 100px 0;
+  }
+  .page-banner .overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+  }
+  .page-banner .container {
+    position: relative;
+    z-index: 2;
+  }
+  .page-banner h1 {
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    font-size: 3.2rem;
+    font-weight: 700;
+  }
+  .breadcrumb-item a, .breadcrumb-item.active {
+    color: #f8f9fa !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  }
+  .title-section {
+    font-size: 2.5rem;
+    font-weight: 600;
+    background: linear-gradient(45deg, #007bff, #00d4ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+  }
+  .marked {
+    background: none;
+    -webkit-text-fill-color: #007bff;
+    font-weight: 700;
+  }
+  .divider {
+    width: 80px;
+    height: 4px;
+    background: #007bff;
+    margin: 20px 0;
+    border-radius: 2px;
+  }
+  .service-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem 1.5rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    height: 100%;
+    border: none;
+  }
+  .service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,123,255,0.1);
+  }
+  .service-icon {
+    font-size: 2.5rem;
+    color: #007bff;
+    margin-bottom: 1rem;
+    transition: transform 0.3s;
+  }
+  .service-card:hover .service-icon {
+    transform: scale(1.2) rotate(5deg);
+  }
+  .service-card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+  }
+  .service-card p {
+    color: #6c757d;
+    margin-bottom: 1rem;
+  }
+  .bullet-list {
+    list-style: none;
+    padding: 0;
+  }
+  .bullet-list li {
+    padding-left: 25px;
+    position: relative;
+    margin-bottom: 8px;
+    color: #555;
+  }
+  .bullet-list li i {
+    position: absolute;
+    left: 0;
+    top: 3px;
+    color: #6f42c1;
+    font-size: 1rem;
+  }
+  .metric-item {
+    text-align: center;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s;
+  }
+  .metric-item:hover {
+    transform: translateY(-5px);
+  }
+  .metric-item h3 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #007bff;
+    margin-bottom: 0.25rem;
+  }
+  .process-step {
+    text-align: center;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    height: 100%;
+    transition: all 0.3s;
+  }
+  .process-step:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,123,255,0.1);
+  }
+  .step-number {
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #007bff, #00d4ff);
+    color: white;
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 auto 1.5rem;
+    box-shadow: 0 5px 15px rgba(0,123,255,0.3);
+  }
+  .testimonial-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    border-left: 4px solid #007bff;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: transform 0.3s;
+    height: 100%;
+  }
+  .testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,123,255,0.1);
+  }
+  .testimonial-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #e9ecef;
+    margin-right: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6c757d;
+    font-weight: 600;
+  }
+  .contact-info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  .contact-info-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(0,123,255,0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #007bff;
+    margin-right: 1rem;
+  }
+  .btn-custom {
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s;
+  }
+  .btn-custom:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,123,255,0.3);
+  }
+  .bg-soft {
+    background: #f8faff;
+    border-radius: 30px;
+    padding: 3rem 1.5rem;
+    margin: 2rem 0;
+  }
+  .rounded-image {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+  }
+  .rounded-image img {
+    transition: transform 0.5s;
+    width: 100%;
+    height: auto;
+  }
+  .rounded-image:hover img {
+    transform: scale(1.02);
+  }
+</style>
+
+<!-- Banner with overlay -->
+<div class="container-fluid px-0">
+  <div class="page-banner" style="background-image: url('{% static 'img/cal2.avif' %}'); background-size: cover; background-position: center;">
+    <div class="overlay"></div>
+    <div class="container text-center">
+      <nav aria-label="breadcrumb">
+        <ul class="breadcrumb justify-content-center py-0 bg-transparent">
+          <li class="breadcrumb-item"><a href="{% url 'index' %}" class="text-white"><i class="fas fa-home me-2"></i>Home</a></li>
+          <li class="breadcrumb-item active text-white" aria-current="page">Call Center</li>
+        </ul>
+      </nav>
+      <h1 class="display-4 fw-bold" data-aos="fade-down">Professional Call Center Solutions</h1>
+      <p class="lead text-white" data-aos="fade-up" data-aos-delay="100">24/7 multilingual support with cutting-edge technology</p>
+    </div>
+  </div>
+</div>
+
+<main>
+  <!-- Intro Section -->
+  <div class="page-section">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6 py-3" data-aos="fade-right">
+          <div class="rounded-image">
+            <img src="{% static 'img/cal3.avif' %}" alt="Call Center Team" class="img-fluid">
+          </div>
+        </div>
+        <div class="col-lg-6 py-3" data-aos="fade-left">
+          <h2 class="title-section">We Provide <span class="marked">Exceptional</span> Customer Support</h2>
+          <div class="divider"></div>
+          <p class="lead text-muted">Our professional call center solutions deliver 24/7 multilingual support with cutting-edge technology. We ensure seamless customer experiences with measurable results and continuous improvement.</p>
+          <div class="mt-4">
+            <a href="#contact" class="btn btn-primary btn-custom me-3"><i class="fas fa-calendar-check me-2"></i>Request Consultation</a>
+            <a href="#services" class="btn btn-outline-primary btn-custom"><i class="fas fa-list me-2"></i>View Services</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Services Section -->
+  <section id="services" class="bg-soft my-5" data-aos="fade-up">
+    <div class="container">
+      <h2 class="text-center title-section">Our Call Center Services</h2>
+      <p class="text-center section-subtitle">Comprehensive solutions tailored to your business needs</p>
+      <div class="row g-4 mt-4">
+        <!-- Inbound Support -->
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-phone-alt"></i>
+            </div>
+            <h3>Inbound Customer Support</h3>
+            <p>24/7 multichannel support with smart routing, escalation protocols, and custom knowledge bases for billing, technical issues, and order management.</p>
+            <ul class="bullet-list">
+              <li><i class="fas fa-check-circle text-purple"></i> Voice, chat, and email support</li>
+              <li><i class="fas fa-check-circle text-purple"></i> SLA tracking and reporting</li>
+              <li><i class="fas fa-check-circle text-purple"></i> First-call resolution focus</li>
+            </ul>
+          </div>
+        </div>
+        <!-- Outbound Sales -->
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="150">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-phone-volume"></i>
+            </div>
+            <h3>Outbound & Sales Campaigns</h3>
+            <p>Lead qualification, appointment setting, surveys and retention campaigns with measurable ROI and real-time analytics.</p>
+            <ul class="bullet-list">
+              <li><i class="fas fa-check-circle text-purple"></i> Predictive & preview dialers</li>
+              <li><i class="fas fa-check-circle text-purple"></i> Script optimization & A/B testing</li>
+              <li><i class="fas fa-check-circle text-purple"></i> Campaign performance tracking</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row g-4 mt-2">
+        <!-- Technology & Integrations -->
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-microchip"></i>
+            </div>
+            <h3>Technology & Integrations</h3>
+            <p>Seamless connection to CRMs, ticketing systems, and analytics platforms with secure data handling and custom reporting.</p>
+            <ul class="bullet-list">
+              <li><i class="fas fa-check-circle text-purple"></i> Salesforce, HubSpot, Zendesk integration</li>
+              <li><i class="fas fa-check-circle text-purple"></i> Call recording & IVR systems</li>
+              <li><i class="fas fa-check-circle text-purple"></i> Custom dashboards & reports</li>
+            </ul>
+          </div>
+        </div>
+        <!-- Multilingual Support -->
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="250">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-globe"></i>
+            </div>
+            <h3>Multilingual Support</h3>
+            <p>Support customers in their native language with trained agents across major languages and cultural contexts.</p>
+            <ul class="bullet-list">
+              <li><i class="fas fa-check-circle text-purple"></i> English, Spanish, French, German, Arabic</li>
+              <li><i class="fas fa-check-circle text-purple"></i> Localized scripts & cultural training</li>
+              <li><i class="fas fa-check-circle text-purple"></i> Region-specific customer service protocols</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Performance Metrics -->
+  <div class="container my-5" data-aos="fade-up">
+    <div class="row align-items-center g-5">
+      <div class="col-md-5" data-aos="fade-right">
+        <div class="rounded-image">
+          <img src="{% static 'img/cal4.webp' %}" alt="Call Center Dashboard">
+        </div>
+      </div>
+      <div class="col-md-7" data-aos="fade-left">
+        <h2 class="title-section">Our Performance <span class="marked">Metrics</span></h2>
+        <div class="divider"></div>
+        <p class="lead text-muted">We maintain exceptional service standards with continuous monitoring and improvement processes. Our advanced analytics provide real-time insights into call center performance.</p>
+        <div class="row g-3 mt-4">
+          <div class="col-6 col-md-3">
+            <div class="metric-item">
+              <h3>99.5%</h3>
+              <p class="text-muted mb-0">Customer Satisfaction</p>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="metric-item">
+              <h3>30s</h3>
+              <p class="text-muted mb-0">Avg. Wait Time</p>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="metric-item">
+              <h3>24/7</h3>
+              <p class="text-muted mb-0">Availability</p>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="metric-item">
+              <h3>ISO</h3>
+              <p class="text-muted mb-0">Compliance Certified</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Process Section -->
+  <section class="bg-soft my-5" data-aos="fade-up">
+    <div class="container">
+      <h2 class="text-center title-section">Our Collaborative Process</h2>
+      <p class="text-center section-subtitle">A proven approach to deliver exceptional results</p>
+      <div class="row g-4 mt-4">
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="process-step">
+            <div class="step-number">1</div>
+            <h4>Discovery & Planning</h4>
+            <p class="text-muted">We analyze your requirements, SLAs, volumes and system integration needs.</p>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="150">
+          <div class="process-step">
+            <div class="step-number">2</div>
+            <h4>Recruitment & Training</h4>
+            <p class="text-muted">We hire domain experts and train them using scenario-based learning.</p>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="process-step">
+            <div class="step-number">3</div>
+            <h4>Launch & Optimization</h4>
+            <p class="text-muted">We go live with comprehensive dashboards and continuous improvement.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <div class="container my-5" data-aos="fade-up">
+    <h2 class="text-center title-section">What Our Clients Say</h2>
+    <p class="text-center section-subtitle">Real stories from businesses we've helped</p>
+    <div class="row g-4 mt-4">
+      <div class="col-md-6" data-aos="fade-right" data-aos-delay="100">
+        <div class="testimonial-card">
+          <p class="mb-4">"Their call center solutions transformed our customer experience. The onboarding was flawless and our CSAT improved within weeks of implementation."</p>
+          <div class="d-flex align-items-center">
+            <div class="testimonial-avatar">SJ</div>
+            <div>
+              <strong>Sarah Johnson</strong>
+              <p class="text-muted mb-0">E-commerce Director</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6" data-aos="fade-left" data-aos-delay="150">
+        <div class="testimonial-card">
+          <p class="mb-4">"The dashboards and reporting capabilities give us real insights into customer interactions. It's a true partnership that drives our business forward."</p>
+          <div class="d-flex align-items-center">
+            <div class="testimonial-avatar">MC</div>
+            <div>
+              <strong>Michael Chen</strong>
+              <p class="text-muted mb-0">SaaS Operations Manager</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Section -->
+  <section id="contact" class="bg-soft my-5" data-aos="fade-up">
+    <div class="container">
+      <div class="row g-5">
+        <div class="col-lg-7">
+          <h2 class="title-section">Ready to Transform Your Customer Experience?</h2>
+          <div class="divider"></div>
+          <p class="lead text-muted mb-4">Our experts will work with you to develop a custom call center solution that meets your specific business needs and exceeds customer expectations.</p>
+          <div class="row mt-5">
+            <div class="col-md-6">
+              <div class="contact-info-item">
+                <div class="contact-info-icon"><i class="fas fa-phone-alt"></i></div>
+                <div>
+                  <h5>Phone Support</h5>
+                  <p class="mb-0">+1 (609) 928-6025</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="contact-info-item">
+                <div class="contact-info-icon"><i class="fas fa-envelope"></i></div>
+                <div>
+                  <h5>Email Us</h5>
+                  <p class="mb-0">grsservices@gmail.com</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 mt-4">
+              <div class="contact-info-item">
+                <div class="contact-info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                <div>
+                  <h5>Visit Our Office</h5>
+                  <p class="mb-0">699 Atlantic City Blvd, Bayville, NJ</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="service-card" style="padding: 2rem;">
+            <h4 class="mb-4"><i class="fas fa-paper-plane text-primary me-2"></i>Request a Consultation</h4>
+            <form method="post" action="">
+              {% csrf_token %}
+              <div class="mb-3">
+                <input required name="full_name" class="form-control form-control-lg rounded-pill" placeholder="Full Name">
+              </div>
+              <div class="mb-3">
+                <input required name="email" type="email" class="form-control form-control-lg rounded-pill" placeholder="Work Email">
+              </div>
+              <div class="mb-3">
+                <input name="company" class="form-control form-control-lg rounded-pill" placeholder="Company (optional)">
+              </div>
+              <div class="mb-3">
+                <textarea required name="message" rows="4" class="form-control rounded-4" placeholder="Tell us about your needs & volumes"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-custom w-100">Get Started</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- AOS initialization -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 800,
+    easing: 'ease-in-out',
+    once: true,
+    mirror: false
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,378 @@
+{% extends 'templates/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Add AOS & Font Awesome (if not already in base) -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+  /* Global enhancements (reuse from other pages) */
+  .page-banner {
+    position: relative;
+    background-attachment: fixed;
+    border-radius: 0 0 50px 50px;
+    overflow: hidden;
+    padding: 100px 0;
+  }
+  .page-banner .overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+  }
+  .page-banner .container {
+    position: relative;
+    z-index: 2;
+  }
+  .page-banner h1 {
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    font-size: 3.2rem;
+    font-weight: 700;
+  }
+  .breadcrumb-item a, .breadcrumb-item.active {
+    color: #f8f9fa !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  }
+  .title-section {
+    font-size: 2.5rem;
+    font-weight: 600;
+    background: linear-gradient(45deg, #007bff, #00d4ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+  }
+  .marked {
+    background: none;
+    -webkit-text-fill-color: #007bff;
+    font-weight: 700;
+  }
+  .divider {
+    width: 80px;
+    height: 4px;
+    background: #007bff;
+    margin: 20px 0;
+    border-radius: 2px;
+  }
+  .service-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem 1.5rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    height: 100%;
+    border: none;
+  }
+  .service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,123,255,0.1);
+  }
+  .service-icon {
+    font-size: 2.5rem;
+    color: #007bff;
+    margin-bottom: 1rem;
+    transition: transform 0.3s;
+  }
+  .service-card:hover .service-icon {
+    transform: scale(1.2) rotate(5deg);
+  }
+  .service-card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+  }
+  .service-card p {
+    color: #6c757d;
+    margin-bottom: 1rem;
+  }
+  .bullet-list {
+    list-style: none;
+    padding: 0;
+  }
+  .bullet-list li {
+    padding-left: 25px;
+    position: relative;
+    margin-bottom: 8px;
+    color: #555;
+  }
+  .bullet-list li i {
+    position: absolute;
+    left: 0;
+    top: 3px;
+    color: #6f42c1;
+    font-size: 1rem;
+  }
+  .metric-item {
+    text-align: center;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s;
+    height: 100%;
+  }
+  .metric-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,123,255,0.1);
+  }
+  .metric-item h3 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #007bff;
+    margin-bottom: 0.25rem;
+  }
+  .step-item {
+    margin-bottom: 1.5rem;
+  }
+  .step-number {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background: #007bff;
+    color: white;
+    border-radius: 50%;
+    font-weight: 700;
+    margin-right: 1rem;
+  }
+  .btn-custom {
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s;
+  }
+  .btn-custom:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,123,255,0.3);
+  }
+  .bg-soft {
+    background: #f8faff;
+    border-radius: 30px;
+    padding: 3rem 1.5rem;
+    margin: 2rem 0;
+  }
+  .rounded-image {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+  }
+  .rounded-image img {
+    transition: transform 0.5s;
+    width: 100%;
+    height: auto;
+  }
+  .rounded-image:hover img {
+    transform: scale(1.02);
+  }
+  .cta-gradient {
+    background: linear-gradient(135deg, #007bff, #6610f2);
+    border-radius: 30px;
+    padding: 4rem 2rem;
+    color: white;
+  }
+</style>
+
+<!-- Banner with overlay -->
+<div class="container-fluid px-0">
+  <div class="page-banner" style="background-image: url('{% static 'img/dig1.avif' %}'); background-size: cover; background-position: center;">
+    <div class="overlay"></div>
+    <div class="container text-center">
+      <nav aria-label="breadcrumb">
+        <ul class="breadcrumb justify-content-center py-0 bg-transparent">
+          <li class="breadcrumb-item"><a href="{% url 'index' %}" class="text-white"><i class="fas fa-home me-2"></i>Home</a></li>
+          <li class="breadcrumb-item active text-white" aria-current="page">Digital Marketing</li>
+        </ul>
+      </nav>
+      <h1 class="display-4 fw-bold" data-aos="fade-down">Digital Marketing Services</h1>
+      <p class="lead text-white" data-aos="fade-up" data-aos-delay="100">Drive growth through data-driven strategies and creative excellence</p>
+    </div>
+  </div>
+</div>
+
+<main>
+  <!-- Intro Section -->
+  <div class="page-section">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6 py-3" data-aos="fade-right">
+          <div class="rounded-image">
+            <img src="{% static 'img/dig2.webp' %}" alt="Digital Marketing Team" class="img-fluid">
+          </div>
+        </div>
+        <div class="col-lg-6 py-3" data-aos="fade-left">
+          <h2 class="title-section">We Drive <span class="marked">Growth</span> Through Digital</h2>
+          <div class="divider"></div>
+          <p class="lead text-muted">Our digital marketing strategies are designed to increase your online visibility, engage your target audience, and convert visitors into loyal customers. We combine data-driven insights with creative approaches to deliver measurable results.</p>
+          <div class="mt-4">
+            <a href="{% url 'contact' %}" class="btn btn-primary btn-custom me-3"><i class="fas fa-calendar-check me-2"></i>Free Consultation</a>
+            <a href="{% url 'services' %}" class="btn btn-outline-primary btn-custom"><i class="fas fa-list me-2"></i>Our Services</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Services Section -->
+  <section id="services" class="bg-soft my-5" data-aos="fade-up">
+    <div class="container">
+      <h2 class="text-center title-section">Our Digital Marketing Services</h2>
+      <p class="text-center section-subtitle">Comprehensive solutions tailored to your business goals</p>
+      <div class="row g-4 mt-4">
+        <!-- Search Engine Optimization -->
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-search"></i>
+            </div>
+            <h3>Search Engine Optimization</h3>
+            <p>Improve your website's visibility in search results with our comprehensive SEO strategies that drive organic traffic and increase conversions.</p>
+            <ul class="bullet-list">
+              <li><i class="fas fa-check-circle"></i> Keyword research & strategy</li>
+              <li><i class="fas fa-check-circle"></i> On-page & technical SEO</li>
+              <li><i class="fas fa-check-circle"></i> Content optimization</li>
+            </ul>
+          </div>
+        </div>
+        <!-- Social Media Marketing -->
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="150">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-share-alt"></i>
+            </div>
+            <h3>Social Media Marketing</h3>
+            <p>Build your brand presence and engage with your audience across social platforms with tailored content and strategic campaigns.</p>
+            <ul class="bullet-list">
+              <li><i class="fas fa-check-circle"></i> Platform-specific strategy</li>
+              <li><i class="fas fa-check-circle"></i> Content creation & scheduling</li>
+              <li><i class="fas fa-check-circle"></i> Community management</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row g-4 mt-2">
+        <!-- Content Marketing -->
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-edit"></i>
+            </div>
+            <h3>Content Marketing</h3>
+            <p>Create valuable, relevant content that attracts and retains your target audience, establishing your brand as an industry authority.</p>
+            <ul class="bullet-list">
+              <li><i class="fas fa-check-circle"></i> Blog posts & articles</li>
+              <li><i class="fas fa-check-circle"></i> Video content creation</li>
+              <li><i class="fas fa-check-circle"></i> Email marketing campaigns</li>
+            </ul>
+          </div>
+        </div>
+        <!-- PPC Advertising -->
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="250">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <h3>PPC Advertising</h3>
+            <p>Drive immediate traffic and conversions with targeted pay-per-click campaigns across search engines and social media platforms.</p>
+            <ul class="bullet-list">
+              <li><i class="fas fa-check-circle"></i> Google Ads management</li>
+              <li><i class="fas fa-check-circle"></i> Social media advertising</li>
+              <li><i class="fas fa-check-circle"></i> Remarketing campaigns</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Approach Section -->
+  <div class="container my-5" data-aos="fade-up">
+    <div class="row align-items-center g-5">
+      <div class="col-md-5" data-aos="fade-right">
+        <div class="rounded-image">
+          <img src="{% static 'img/dig3.webp' %}" alt="Digital Marketing Strategy">
+        </div>
+      </div>
+      <div class="col-md-7" data-aos="fade-left">
+        <h2 class="title-section">Our Data-Driven <span class="marked">Approach</span></h2>
+        <div class="divider"></div>
+        <p class="lead text-muted">We believe in marketing that delivers measurable results. Our approach combines creative strategy with analytical rigor to ensure every campaign drives meaningful business outcomes.</p>
+        <div class="row mt-4">
+          <div class="col-md-6 step-item">
+            <h4><span class="step-number">1</span> Research & Analysis</h4>
+            <p class="text-muted">We begin by understanding your market, audience, and competitors to identify opportunities and challenges.</p>
+          </div>
+          <div class="col-md-6 step-item">
+            <h4><span class="step-number">2</span> Strategy Development</h4>
+            <p class="text-muted">We create customized strategies tailored to your business goals and target audience.</p>
+          </div>
+          <div class="col-md-6 step-item">
+            <h4><span class="step-number">3</span> Implementation</h4>
+            <p class="text-muted">Our team executes campaigns with precision, ensuring consistent messaging across all channels.</p>
+          </div>
+          <div class="col-md-6 step-item">
+            <h4><span class="step-number">4</span> Optimization</h4>
+            <p class="text-muted">We continuously monitor performance and make data-driven adjustments to maximize ROI.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Results Section -->
+  <section class="bg-soft my-5" data-aos="fade-up">
+    <div class="container">
+      <h2 class="text-center title-section">Our Digital Marketing Results</h2>
+      <p class="text-center section-subtitle">Proven outcomes for our clients</p>
+      <div class="row g-4 mt-4">
+        <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="100">
+          <div class="metric-item">
+            <h3>+85%</h3>
+            <p class="text-muted">Average increase in organic traffic for SEO clients</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="150">
+          <div class="metric-item">
+            <h3>+60%</h3>
+            <p class="text-muted">Average increase in engagement for social media clients</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="200">
+          <div class="metric-item">
+            <h3>3.5x</h3>
+            <p class="text-muted">Average ROI for PPC advertising campaigns</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="250">
+          <div class="metric-item">
+            <h3>+40%</h3>
+            <p class="text-muted">Average increase in conversion rates for our clients</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="container my-5" data-aos="fade-up">
+    <div class="cta-gradient text-center p-5">
+      <h2 class="mb-4 display-5 fw-bold">Ready to Transform Your Digital Presence?</h2>
+      <p class="mb-4 lead" style="font-size: 1.2rem;">Let's discuss how our digital marketing strategies can drive growth for your business.</p>
+      <a href="{% url 'contact' %}" class="btn btn-light btn-lg btn-custom px-5 py-3"><i class="fas fa-calendar-check me-2"></i>Schedule a Free Consultation</a>
+    </div>
+  </section>
+</main>
+
+<!-- AOS initialization -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 800,
+    easing: 'ease-in-out',
+    once: true,
+    mirror: false
+  });
+</script>
+{% endblock %}

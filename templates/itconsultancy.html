@@ -1,0 +1,416 @@
+{% extends 'templates/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Add AOS & Font Awesome (if not already in base) -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+  /* Global enhancements (reuse from other pages) */
+  .page-banner {
+    position: relative;
+    background-attachment: fixed;
+    border-radius: 0 0 50px 50px;
+    overflow: hidden;
+    padding: 100px 0;
+  }
+  .page-banner .overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+  }
+  .page-banner .container {
+    position: relative;
+    z-index: 2;
+  }
+  .page-banner h1 {
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    font-size: 3.2rem;
+    font-weight: 700;
+  }
+  .breadcrumb-item a, .breadcrumb-item.active {
+    color: #f8f9fa !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  }
+  .title-section {
+    font-size: 2.5rem;
+    font-weight: 600;
+    background: linear-gradient(45deg, #007bff, #00d4ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+  }
+  .marked {
+    background: none;
+    -webkit-text-fill-color: #007bff;
+    font-weight: 700;
+  }
+  .divider {
+    width: 80px;
+    height: 4px;
+    background: #007bff;
+    margin: 20px 0;
+    border-radius: 2px;
+  }
+  .service-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem 1.5rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    height: 100%;
+    border: none;
+  }
+  .service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,123,255,0.1);
+  }
+  .service-icon {
+    font-size: 2.5rem;
+    color: #007bff;
+    margin-bottom: 1rem;
+    transition: transform 0.3s;
+  }
+  .service-card:hover .service-icon {
+    transform: scale(1.2) rotate(5deg);
+  }
+  .service-card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+  }
+  .service-card p {
+    color: #6c757d;
+    margin-bottom: 1rem;
+  }
+  .bullet-list {
+    list-style: none;
+    padding: 0;
+  }
+  .bullet-list li {
+    padding-left: 25px;
+    position: relative;
+    margin-bottom: 8px;
+    color: #555;
+  }
+  .bullet-list li i {
+    position: absolute;
+    left: 0;
+    top: 3px;
+    color: #6f42c1;
+    font-size: 1rem;
+  }
+  .step-item {
+    margin-bottom: 1.5rem;
+  }
+  .step-number {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background: #007bff;
+    color: white;
+    border-radius: 50%;
+    font-weight: 700;
+    margin-right: 1rem;
+  }
+  .btn-custom {
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s;
+  }
+  .btn-custom:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,123,255,0.3);
+  }
+  .bg-soft {
+    background: #f8faff;
+    border-radius: 30px;
+    padding: 3rem 1.5rem;
+    margin: 2rem 0;
+  }
+  .rounded-image {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+  }
+  .rounded-image img {
+    transition: transform 0.5s;
+    width: 100%;
+    height: auto;
+  }
+  .rounded-image:hover img {
+    transform: scale(1.02);
+  }
+  .industry-card {
+    background: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    height: 100%;
+    transition: transform 0.3s;
+    text-align: center;
+  }
+  .industry-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,123,255,0.1);
+  }
+  .industry-card i {
+    font-size: 2.5rem;
+    color: #007bff;
+    margin-bottom: 1rem;
+  }
+  .results-gradient {
+    background: linear-gradient(135deg, #007bff, #6610f2);
+    border-radius: 30px;
+    padding: 3rem 2rem;
+    color: white;
+  }
+  .results-gradient h3 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+  }
+  .cta-light {
+    background: #f8faff;
+    border-radius: 30px;
+    padding: 4rem 2rem;
+  }
+</style>
+
+<!-- Banner with overlay -->
+<div class="container-fluid px-0">
+  <div class="page-banner" style="background-image: url('{% static 'img/it4.webp' %}'); background-size: cover; background-position: center;">
+    <div class="overlay"></div>
+    <div class="container text-center">
+      <nav aria-label="breadcrumb">
+        <ul class="breadcrumb justify-content-center py-0 bg-transparent">
+          <li class="breadcrumb-item"><a href="{% url 'index' %}" class="text-white"><i class="fas fa-home me-2"></i>Home</a></li>
+          <li class="breadcrumb-item active text-white" aria-current="page">IT Consultancy</li>
+        </ul>
+      </nav>
+      <h1 class="display-4 fw-bold" data-aos="fade-down">IT Consultancy Services</h1>
+      <p class="lead text-white" data-aos="fade-up" data-aos-delay="100">Strategic technology guidance for business growth</p>
+    </div>
+  </div>
+</div>
+
+<main>
+  <!-- Intro Section -->
+  <div class="page-section">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6 py-3" data-aos="fade-right">
+          <div class="rounded-image">
+            <img src="{% static 'img/IT2.webp' %}" alt="IT Consultancy Team" class="img-fluid">
+          </div>
+        </div>
+        <div class="col-lg-6 py-3" data-aos="fade-left">
+          <h2 class="title-section">Transforming <span class="marked">Business</span> Through Technology</h2>
+          <div class="divider"></div>
+          <p class="lead text-muted">Our expert IT consultants provide strategic guidance and technical expertise to help your business leverage technology for growth, efficiency, and competitive advantage. From digital transformation to infrastructure optimization, we deliver solutions that drive real business value.</p>
+          <div class="mt-4">
+            <a href="{% url 'contact' %}" class="btn btn-primary btn-custom me-3"><i class="fas fa-calendar-check me-2"></i>Request IT Consultation</a>
+            <a href="{% url 'services' %}" class="btn btn-outline-primary btn-custom"><i class="fas fa-list me-2"></i>Our Services</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Services Section -->
+  <section id="services" class="bg-soft my-5" data-aos="fade-up">
+    <div class="container">
+      <h2 class="text-center title-section">Our IT Consultancy Services</h2>
+      <p class="text-center section-subtitle">Strategic solutions for your technology challenges</p>
+      <div class="row g-4 mt-4">
+        <!-- IT Strategy -->
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-chess-board"></i>
+            </div>
+            <h3>IT Strategy & Planning</h3>
+            <p>Develop a comprehensive technology roadmap aligned with your business objectives and growth targets.</p>
+            <ul class="bullet-list">
+              <li><i class="fas fa-check-circle"></i> Technology roadmap development</li>
+              <li><i class="fas fa-check-circle"></i> Digital transformation strategy</li>
+              <li><i class="fas fa-check-circle"></i> IT governance & risk management</li>
+            </ul>
+          </div>
+        </div>
+        <!-- Cloud Solutions -->
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="150">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-cloud"></i>
+            </div>
+            <h3>Cloud Solutions</h3>
+            <p>Migrate, optimize, and manage your cloud infrastructure for improved scalability, security, and cost-efficiency.</p>
+            <ul class="bullet-list">
+              <li><i class="fas fa-check-circle"></i> Cloud migration services</li>
+              <li><i class="fas fa-check-circle"></i> Multi-cloud strategy</li>
+              <li><i class="fas fa-check-circle"></i> Cost optimization & management</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row g-4 mt-2">
+        <!-- Cybersecurity -->
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3>Cybersecurity</h3>
+            <p>Protect your business assets with comprehensive security assessments, strategy, and implementation services.</p>
+            <ul class="bullet-list">
+              <li><i class="fas fa-check-circle"></i> Security risk assessments</li>
+              <li><i class="fas fa-check-circle"></i> Compliance & governance</li>
+              <li><i class="fas fa-check-circle"></i> Incident response planning</li>
+            </ul>
+          </div>
+        </div>
+        <!-- Software Development -->
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="250">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-code"></i>
+            </div>
+            <h3>Software Development</h3>
+            <p>Custom software solutions designed to address your unique business challenges and opportunities.</p>
+            <ul class="bullet-list">
+              <li><i class="fas fa-check-circle"></i> Custom application development</li>
+              <li><i class="fas fa-check-circle"></i> API integration services</li>
+              <li><i class="fas fa-check-circle"></i> DevOps implementation</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Section -->
+  <div class="container my-5" data-aos="fade-up">
+    <div class="row align-items-center g-5">
+      <div class="col-md-5" data-aos="fade-right">
+        <div class="rounded-image">
+          <img src="{% static 'img/IT3.webp' %}" alt="IT Consultancy Process">
+        </div>
+      </div>
+      <div class="col-md-7" data-aos="fade-left">
+        <h2 class="title-section">Our IT <span class="marked">Consultancy Process</span></h2>
+        <div class="divider"></div>
+        <p class="lead text-muted">We follow a structured approach to ensure our IT solutions are aligned with your business goals and deliver measurable results.</p>
+        <div class="row mt-4">
+          <div class="col-md-6 step-item">
+            <h4><span class="step-number">1</span> Discovery & Assessment</h4>
+            <p class="text-muted">We begin by understanding your business objectives, current technology landscape, and challenges.</p>
+          </div>
+          <div class="col-md-6 step-item">
+            <h4><span class="step-number">2</span> Strategy Development</h4>
+            <p class="text-muted">We create a comprehensive technology strategy aligned with your business goals.</p>
+          </div>
+          <div class="col-md-6 step-item">
+            <h4><span class="step-number">3</span> Solution Design</h4>
+            <p class="text-muted">Our experts design tailored solutions that address your specific needs and requirements.</p>
+          </div>
+          <div class="col-md-6 step-item">
+            <h4><span class="step-number">4</span> Implementation & Support</h4>
+            <p class="text-muted">We implement the solutions and provide ongoing support to ensure continued success.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Industries Section -->
+  <section class="bg-soft my-5" data-aos="fade-up">
+    <div class="container">
+      <h2 class="text-center title-section">Industries We Serve</h2>
+      <p class="text-center section-subtitle">Tailored expertise across diverse sectors</p>
+      <div class="row g-4 mt-4">
+        <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="100">
+          <div class="industry-card">
+            <i class="fas fa-heartbeat"></i>
+            <h5>Healthcare</h5>
+            <p class="text-muted">HIPAA-compliant solutions, EHR systems, and healthcare data management.</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="150">
+          <div class="industry-card">
+            <i class="fas fa-chart-line"></i>
+            <h5>Finance</h5>
+            <p class="text-muted">Fintech solutions, secure banking systems, and financial data analytics.</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="200">
+          <div class="industry-card">
+            <i class="fas fa-shopping-cart"></i>
+            <h5>Retail & E-commerce</h5>
+            <p class="text-muted">E-commerce platforms, inventory management, and customer experience solutions.</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="250">
+          <div class="industry-card">
+            <i class="fas fa-industry"></i>
+            <h5>Manufacturing</h5>
+            <p class="text-muted">Supply chain optimization, IoT solutions, and industrial automation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Results Section -->
+  <section class="container my-5" data-aos="fade-up">
+    <div class="results-gradient text-center p-5">
+      <h2 class="mb-5 display-5 fw-bold">Our IT Consultancy Results</h2>
+      <div class="row g-4">
+        <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="100">
+          <h3>+40%</h3>
+          <p class="lead">Average operational efficiency improvement</p>
+        </div>
+        <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="150">
+          <h3>+35%</h3>
+          <p class="lead">Reduction in IT costs</p>
+        </div>
+        <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="200">
+          <h3>99.5%</h3>
+          <p class="lead">System uptime achieved</p>
+        </div>
+        <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="250">
+          <h3>+60%</h3>
+          <p class="lead">Faster deployment cycles</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="container my-5" data-aos="fade-up">
+    <div class="cta-light text-center p-5">
+      <h2 class="mb-4">Ready to Transform Your IT Infrastructure?</h2>
+      <p class="mb-4 lead text-muted">Let our expert consultants optimize your technology for business growth and efficiency.</p>
+      <a href="{% url 'contact' %}" class="btn btn-primary btn-custom btn-lg px-5 py-3"><i class="fas fa-calendar-check me-2"></i>Start Your IT Transformation</a>
+    </div>
+  </section>
+</main>
+
+<!-- AOS initialization -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 800,
+    easing: 'ease-in-out',
+    once: true,
+    mirror: false
+  });
+</script>
+{% endblock %}

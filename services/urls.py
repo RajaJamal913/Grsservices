@@ -13,6 +13,13 @@ urlpatterns = [
     path('blog-single/', views.blog_single, name='blog_single'),
     path('contact/', views.contact, name='contact'),
     path('services/', views.services, name='services'),
+    path('callcenter/', views.callcenter, name='callcenter'),
+    path('softwaredevelopment/', views.softwaredevelopment, name='softwaredevelopment'),
+    path('digitalmarketing/', views.digitalmarketing, name='digitalmarketing'),
+    path('medicalbilling/', views.medicalbilling, name='medicalbilling'),
+    path('contentwriting/', views.contentwriting, name='contentwriting'),
+    path('itconsultancy/', views.itconsultancy, name='itconsultancy'),
+    path('muhammadjamalraja/', views.muhammadjamalraja, name='muhammadjamalraja'),
 ]
 from django.conf.urls.static import static
 
