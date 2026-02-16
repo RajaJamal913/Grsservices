@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="copyright" content="MACode ID, https://macodeid.com">
+  <title>GRS Buisness and Consultancy</title>
+
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'vendor/animate/animate.css' %}">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+  <link rel="stylesheet" href="{% static 'css/maicons.css' %}">
+  <link rel="stylesheet" href="{% static 'vendor/owl-carousel/css/owl.carousel.css' %}">
+  <link rel="stylesheet" href="{% static 'css/theme.css' %}">
+
+  <!-- WhatsApp Icon Styles -->
+  <style>
+    .whatsapp-float {
+      position: fixed;
+      width: 60px;
+      height: 60px;
+      bottom: 40px;
+      right: 40px;
+      background-color: #25d366;
+      color: white;
+      border-radius: 50%;
+      text-align: center;
+      font-size: 30px;
+      box-shadow: 2px 2px 3px #999;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light navbar-float">
+      <div class="container">
+        <a href="{% url 'index' %}" class="navbar-brand">
+          <img src="{% static 'img/logo.jpeg' %}" alt="GRS Logo" class="logo-img" style="height: 50px; margin-right: 10px;">
+          GRS <span class="text-primary">Business & Consultancy</span>
+        </a>
+
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarContent">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="navbar-collapse collapse" id="navbarContent">
+          <ul class="navbar-nav ml-lg-4 pt-3 pt-lg-0">
+            <li class="nav-item"><a href="{% url 'index' %}" class="nav-link">Home</a></li>
+            <li class="nav-item"><a href="{% url 'about' %}" class="nav-link">About</a></li>
+            <li class="nav-item"><a href="{% url 'services' %}" class="nav-link">Services</a></li>
+            <li class="nav-item"><a href="{% url 'team' %}" class="nav-link">Team</a></li>
+            <li class="nav-item"><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  {% block content %}{% endblock %}
+
+  <footer class="page-footer bg-dark text-light">
+    <div class="container">
+      <div class="row justify-content-between py-5">
+        <!-- Company Info -->
+        <div class="col-lg-3">
+          <h3>GRS <span class="text-primary">Business & Consultancy</span></h3>
+          <p>Your trusted partner for business growth and digital transformation.</p>
+        </div>
+        <!-- Contact Details (New Section) -->
+        <div class="col-lg-3">
+          <h5>Contact Details</h5>
+          <p><strong>Address:</strong> 699 Atlantic City Blvd, Bayville, NJ, USA</p>
+          <p><strong>Email:</strong> <a href="mailto:digigram@mail.com" class="text-light">www.grsservices.co</a></p>
+          <p><strong>Phone:</strong> <a href="tel:+1 (609) 928-6025" class="text-light">+1 (609) 928-6025</a></p>
+        </div>
+        <!-- Working Hours -->
+        <div class="col-lg-3">
+          <h5>Working Hours</h5>
+          <p>Monday to Saturday</p>
+          <p>9:00 AM to 6:00 PM</p>
+        </div>
+        <!-- Quick Links -->
+        <div class="col-lg-2">
+          <h5>Quick Links</h5>
+          <ul class="footer-menu list-unstyled">
+            <li><a href="#">How It Works</a></li>
+            <li><a href="#">Security</a></li>
+            <li><a href="#">Pricing</a></li>
+            <li><a href="#">Resources</a></li>
+            <li><a href="#">Report a Bug</a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- Copyright & Privacy -->
+      <div class="row border-top pt-3">
+        <div class="col-md-6">
+          <p>&copy; 2024 GRS Business & Consultancy. All rights reserved.</p>
+        </div>
+        <div class="col-md-6 text-md-right">
+          <a href="#" class="text-light px-3">Privacy Policy</a>
+          <a href="#" class="text-light px-3">Contact Us</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Floating Icon -->
+  <a href="https://wa.me/+1 (609) 928-6025" class="whatsapp-float" target="_blank">
+    <i class="mai-logo-whatsapp"></i>
+  </a>
+
+  <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'vendor/wow/wow.min.js' %}"></script>
+  <script src="{% static 'vendor/owl-carousel/js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'vendor/waypoints/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'vendor/animateNumber/jquery.animateNumber.min.js' %}"></script>
+  <script src="{% static 'js/google-maps.js' %}"></script>
+  <script src="{% static 'js/theme.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+{% extends 'templates/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="page-banner" style="background-image: url('{% static 'img/aboutus.jpg' %}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-md-6">
+        <nav aria-label="Breadcrumb">
+          <ul class="breadcrumb justify-content-center py-0 bg-transparent">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+            <li class="breadcrumb-item active">About</li>
+          </ul>
+        </nav>
+        <h1 class="text-center text-Black">   About Us</h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <main>
+    <div class="page-section">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6 py-3">
+            <div class="text-center">
+              <img src="{% static 'img/meet.jpg' %}" alt="About Us" class="img-fluid" style="max-width: 100%; height: auto; width: 80%;">
+          </div>
+
+          </div>
+          <div class="col-lg-6 py-3 pr-lg-5">
+            <h2 class="title-section">We Are a <span class="marked">Results-Driven</span> Team</h2>
+            <div class="divider"></div>
+            <p>Our expertise lies in delivering cutting-edge solutions tailored to your business needs. From automation to analytics, we ensure seamless operations and measurable success.</p>
+            <a href="#" class="btn btn-primary">Explore Our Solutions</a>
+            <a href="#" class="btn btn-outline border ml-2">Client Success Stories</a>
+        </div>
+
+        </div>
+      </div>
+    </div>
+    {% load static %}
+
+<section style="margin: 60px 10px; padding: 40px; background-color: #f9f9f9; border-radius: 10px;">
+    <div class="container">
+        <div class="row">
+            <!-- Our Mission -->
+            <div class="col-md-6">
+                <div style="background: #fff; border-radius: 8px; padding: 20px; box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.1);">
+                    <h3 style="color: #2c3e50; font-weight: bold;">
+                        <span style="color: #007bff; margin-right: 10px;"><i class="icon-layers"></i></span>
+                        Our Mission
+                    </h3>
+                    <p style="color: #444;">We empower businesses with cutting-edge digital solutions. By integrating automation, secure processing, and user-friendly interfaces, we help businesses scale efficiently.</p>
+                </div>
+            </div>
+
+            <!-- Innovation -->
+            <div class="col-md-6">
+                <div style="background: #fff; border-radius: 8px; padding: 20px; box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.1);">
+                    <h3 style="color: #2c3e50; font-weight: bold;">
+                        <span style="color: #007bff; margin-right: 10px;"><i class="icon-rocket"></i></span>
+                        Innovation
+                    </h3>
+                    <p style="color: #444;">We leverage AI-driven technology and real-time analytics to enhance efficiency. Our commitment to automation and optimization ensures streamlined business operations.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="margin-top: 40px;">
+            <!-- Our Team -->
+            <div class="col-md-6">
+                <div style="background: #fff; border-radius: 8px; padding: 20px; box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.1);">
+                    <h3 style="color: #2c3e50; font-weight: bold;">
+                        <span style="color: #007bff; margin-right: 10px;"><i class="icon-users"></i></span>
+                        Our Team
+                    </h3>
+                    <p style="color: #444;">Our team consists of experts in digital automation, analytics, and customer solutions. We ensure a seamless user experience with top-tier technology and innovation.</p>
+                </div>
+            </div>
+
+            <!-- Customer-Centric -->
+            <div class="col-md-6">
+                <div style="background: #fff; border-radius: 8px; padding: 20px; box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.1);">
+                    <h3 style="color: #2c3e50; font-weight: bold;">
+                        <span style="color: #007bff; margin-right: 10px;"><i class="icon-heart"></i></span>
+                        Customer-Centric
+                    </h3>
+                    <p style="color: #444;">We prioritize customer satisfaction by offering tailored solutions, transparent workflows, and top-tier support, helping businesses optimize their growth.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <div class="container mt-5">
+      <div class="row align-items-center">
+          <!-- Image Section -->
+
+
+          <!-- Text Content Section -->
+          <div class="col-md-7">
+              <p style="color: #444;">
+                  Our platform empowers businesses with cutting-edge tools for digital growth.
+                  Whether you need advanced social media solutions, automated services, or secure payment processing, we have you covered.
+              </p>
+              <p style="color: #444;">
+                  With years of experience, we understand what it takes to create a streamlined experience for users. Our intuitive dashboard, AI-powered insights, and automation features make managing your business effortless.
+              </p>
+
+              <!-- Bullet Points -->
+              <ul style="list-style-type: none; padding: 0;">
+                  <li style="padding-left: 25px; position: relative; margin-bottom: 8px;">
+                      <span style="color:rgb(153, 0, 255); font-weight: bold; position: absolute; left: 0;">✔</span> Seamless integration with multiple platforms.
+                  </li>
+                  <li style="padding-left: 25px; position: relative; margin-bottom: 8px;">
+                      <span style="color: rgb(153, 0, 255); font-weight: bold; position: absolute; left: 0;">✔</span> Robust security and data management.
+                  </li>
+                  <li style="padding-left: 25px; position: relative; margin-bottom: 8px;">
+                      <span style="color:rgb(153, 0, 255); font-weight: bold; position: absolute; left: 0;">✔</span> AI-driven analytics to optimize your business performance.
+                  </li>
+              </ul>
+          </div>
+          <div class="col-md-5">
+            <div style="box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1); border-radius: 8px; overflow: hidden;">
+                <img src="{% static 'img/meeting.jpg' %}" alt="About Us" style="width: 100%; border-radius: 8px;">
+            </div>
+        </div>
+      </div>
+  </div>
+
+   <!-- Our Dedication to Excellence -->
+<section id="quality-excellence" style="margin: 40px 10px; padding: 40px; background-color: #f9f9f9; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+  <div class="container">
+    <h2 style="margin-bottom: 20px; text-align: center;">Our Dedication to Excellence</h2>
+    <p style="font-size: 16px; color: #333; line-height: 1.6; text-align: center;">
+      We are committed to delivering exceptional quality and efficiency in every aspect of our services. Through continuous process optimization, regular quality audits, and adherence to the latest industry standards, we ensure that our clients receive the highest level of service.
+    </p>
+    <p style="font-size: 16px; color: #333; line-height: 1.6; text-align: center;">
+      Our team undergoes ongoing training and follows best practices to maintain accuracy, consistency, and security in all operations. With a proactive approach to improvement, we help businesses streamline their workflows with confidence.
+    </p>
+  </div>
+</section>
+
+<!-- Secure & Transparent Operations -->
+<section id="secure-operations" style="margin: 40px 10px; padding: 40px; background-color: #f9f9f9; border-radius: 10px;">
+  <div class="container">
+    <h2 style="margin-bottom: 20px; text-align: center;">Secure & Transparent Operations</h2>
+    <p style="font-size: 16px; color: #333; line-height: 1.6; text-align: center;">
+      Security and transparency are at the core of our operations. We implement robust data protection protocols to safeguard sensitive information, ensuring compliance with all relevant regulations.
+    </p>
+    <p style="font-size: 16px; color: #333; line-height: 1.6; text-align: center;">
+      Our clients receive real-time reports, progress updates, and insights into performance metrics, fostering complete trust and control over their operations.
+    </p>
+  </div>
+</section>
+
+  </main>
+{% endblock %}

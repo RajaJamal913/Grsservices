@@ -1,0 +1,114 @@
+{% extends 'templates/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container mt-5">
+  <!-- Page Banner -->
+  <div class="page-banner" style="background-image: url('{% static 'img/img_bg_1.jpg' %}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-md-6">
+        <nav aria-label="breadcrumb">
+          <ul class="breadcrumb justify-content-center py-0 bg-transparent">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+            <li class="breadcrumb-item active">Services</li>
+          </ul>
+        </nav>
+        <h1 class="text-center">Our Services</h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Services Section -->
+<section class="container py-5">
+  <div class="row text-center mb-4">
+    <div class="col">
+      <h2>What We Offer</h2>
+      <p class="text-muted">Providing efficient, secure, and innovative solutions for your business needs.</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- Service Cards -->
+    <div class="col-md-4">
+      <div class="card shadow-sm text-center p-4">
+        <div class="service-icon mb-3">
+          <i class="icon-layers" style="font-size: 40px; color: #007bff;"></i>
+        </div>
+        <h4>Healthcare Administration</h4>
+        <p>We streamline scheduling, billing, and patient management, enabling providers to focus on patient care.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card shadow-sm text-center p-4">
+        <div class="service-icon mb-3">
+          <i class="icon-rocket" style="font-size: 40px; color: #007bff;"></i>
+        </div>
+        <h4>Technology Integration</h4>
+        <p>Enhancing efficiency through automation, AI-driven solutions, and secure data management practices.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card shadow-sm text-center p-4">
+        <div class="service-icon mb-3">
+          <i class="icon-users" style="font-size: 40px; color: #007bff;"></i>
+        </div>
+        <h4>Outsourcing Solutions</h4>
+        <p>Our team of experts handles essential tasks, reducing workload and improving operational efficiency.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding: 50px 15px; background-color: #f9f9f9;">
+  <div class="container">
+    <div class="row g-4">
+      <!-- Additional Service Sections -->
+      <div class="col-md-4">
+        <div class="text-center" style="border: 1px solid #ddd; border-radius: 8px; padding: 20px; transition: transform 0.3s ease;">
+          <img src="{% static 'img/aboutcall.jpg' %}" alt="Call Center" style="border-radius: 8px; height: 200px; width: 100%; object-fit: cover;">
+          <h5 class="mt-3 font-weight-bold"><i class="fas fa-user-clock text-primary"></i> Call Center</h5>
+          <p>Professional support for customer service, appointment scheduling, and emergency assistance.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="text-center" style="border: 1px solid #ddd; border-radius: 8px; padding: 20px; transition: transform 0.3s ease;">
+          <img src="{% static 'img/soft.jpg' %}" alt="Software Development" style="border-radius: 8px; height: 200px; width: 100%; object-fit: cover;">
+          <h5 class="mt-3 font-weight-bold"><i class="fas fa-code text-danger"></i> Software Development</h5>
+          <p>Custom healthcare solutions, including EMR, patient portals, and automation tools.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="text-center" style="border: 1px solid #ddd; border-radius: 8px; padding: 20px; transition: transform 0.3s ease;">
+          <img src="{% static 'img/digital.jpg' %}" alt="Digital Marketing" style="border-radius: 8px; height: 200px; width: 100%; object-fit: cover;">
+          <h5 class="mt-3 font-weight-bold"><i class="fas fa-bullhorn text-danger"></i> Digital Marketing</h5>
+          <p>SEO, social media management, and targeted advertising for business growth.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4 mt-4">
+      <div class="col-md-4">
+        <div class="text-center" style="border: 1px solid #ddd; border-radius: 8px; padding: 20px; transition: transform 0.3s ease;">
+          <img src="{% static 'img/med.webp' %}" alt="Medical Billing" style="border-radius: 8px; height: 200px; width: 100%; object-fit: cover;">
+          <h5 class="mt-3 font-weight-bold"><i class="fas fa-file-invoice-dollar text-danger"></i> Medical Billing</h5>
+          <p>Insurance claims, payment processing, and revenue cycle management.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="text-center" style="border: 1px solid #ddd; border-radius: 8px; padding: 20px; transition: transform 0.3s ease;">
+          <img src="{% static 'img/content.jpg' %}" alt="Content Writing" style="border-radius: 8px; height: 200px; width: 100%; object-fit: cover;">
+          <h5 class="mt-3 font-weight-bold"><i class="fas fa-pen-fancy text-danger"></i> Content Writing</h5>
+          <p>SEO-optimized articles, blog posts, and marketing content.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="text-center" style="border: 1px solid #ddd; border-radius: 8px; padding: 20px; transition: transform 0.3s ease;">
+          <img src="{% static 'img/it.jpg' %}" alt="IT Consultancy" style="border-radius: 8px; height: 200px; width: 100%; object-fit: cover;">
+          <h5 class="mt-3 font-weight-bold"><i class="fas fa-laptop-code text-danger"></i> IT Consultancy</h5>
+          <p>System integration, cybersecurity, and digital transformation strategies.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

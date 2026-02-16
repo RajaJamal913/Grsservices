@@ -1,0 +1,337 @@
+{% extends 'templates/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<header>
+  <div class="page-banner home-banner">
+      <div class="container h-100">
+          <div class="row align-items-center h-100">
+              <div class="col-lg-6 py-3 wow fadeInUp">
+                  <h1 class="mb-4">Empowering Businesses with Innovative Solutions</h1>
+                  <p class="text-lg mb-5">
+                    Delivering world-class services to help businesses thrive globally.
+                    We empower organizations with innovative solutions, cutting-edge technology,
+                    and strategic expertise to enhance efficiency, drive growth, and stay ahead in a competitive market.
+                </p>
+
+                  <a href="#" class="btn btn-outline border text-secondary">Learn More</a>
+                  <a href="#" class="btn btn-primary btn-split ml-2">Our Services <div class="fab"><span class="mai-play"></span></div></a>
+              </div>
+              <div class="col-lg-6 py-3 wow zoomIn">
+                  <div class="img-place">
+                      <img src="{% static 'img/bgimage1.png' %}" alt="Global Business Solutions">
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</header>
+
+
+<main>
+  <div class="page-section features">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4 py-3 wow fadeInUp">
+                <div class="d-flex flex-row">
+                    <div class="img-fluid mr-3">
+                        <img src="{% static 'img/icon_pattern.svg' %}" alt="">
+                    </div>
+                    <div>
+                        <h5>Expert Business Consultation</h5>
+                        <p class="text-lg">Helping businesses optimize operations, improve efficiency, and achieve sustainable growth with strategic insights.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 py-3 wow fadeInUp">
+                <div class="d-flex flex-row">
+                    <div class="img-fluid mr-3">
+                        <img src="{% static 'img/icon_pattern.svg' %}" alt="">
+                    </div>
+                    <div>
+                        <h5>Innovative Digital Solutions</h5>
+                        <p class="text-lg">Providing cutting-edge technology and digital transformation strategies to enhance business productivity and success.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 py-3 wow fadeInUp">
+                <div class="d-flex flex-row">
+                    <div class="img-fluid mr-3">
+                        <img src="{% static 'img/icon_pattern.svg' %}" alt="">
+                    </div>
+                    <div>
+                        <h5>Global Business Support</h5>
+                        <p class="text-lg">Offering customized solutions to help organizations expand their reach, streamline processes, and stay ahead in the global market.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</main>
+    <div class="page-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 py-3 wow zoomIn">
+            <div class="img-place text-center">
+              <img src="{%static 'img/bg_image_2.png'%}" alt="">
+            </div>
+          </div>
+          <div class="col-lg-6 py-3 wow fadeInRight">
+            <h2 class="title-section">We're <span class="marked">Dynamic</span> Team of Creatives People</h2>
+            <div class="divider"></div>
+            <p>We provide marketing services to startups & small business to looking for partner for their digital media, design & dev lead generation & communication.</p>
+            <div class="img-place mb-3">
+              <img src="{%static 'img/testi_image.png'%}" alt="">
+            </div>
+            <a href="#" class="btn btn-primary">More Details</a>
+            <a href="#" class="btn btn-outline border ml-2">Success Stories</a>
+          </div>
+        </div>
+      </div> <!-- .container -->
+    </div> <!-- .page-section -->
+
+  <div class="page-section services" style="background: #f8f9fa; padding: 50px 0;">
+    <div class="container">
+        <div class="text-center">
+            <h2 style="font-size: 2.5rem; font-weight: bold; color: #333; margin-bottom: 50px;">Our Services</h2>
+        </div>
+        <div class="row">
+            <!-- Call Center -->
+            <div class="col-md-6 col-lg-4 py-3">
+                <div style="background: #ffffff; border-radius: 8px; text-align: center; padding: 25px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease-in-out;"
+                     onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0px 6px 15px rgba(0, 0, 0, 0.2)';"
+                     onmouseout="this.style.transform='none'; this.style.boxShadow='0px 4px 8px rgba(0, 0, 0, 0.1)';">
+                    <img src="{% static 'img/callcenter.jpg' %}" alt="Call Center"
+                         style="width: 250px; height: 150px; object-fit: cover; border-radius: 8px; margin-bottom: 15px;">
+                    <h5 style="font-size: 1.4rem; font-weight: bold; color: rgb(99, 19, 247);">Call Center Solutions</h5>
+                    <p style="font-size: 1.1rem; color: #555;">Providing professional customer support and telemarketing services to enhance business communication and client satisfaction.</p>
+                </div>
+            </div>
+            <!-- Medical Billing -->
+            <div class="col-md-6 col-lg-4 py-3">
+                <div style="background: #ffffff; border-radius: 8px; text-align: center; padding: 25px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease-in-out;"
+                     onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0px 6px 15px rgba(0, 0, 0, 0.2)';"
+                     onmouseout="this.style.transform='none'; this.style.boxShadow='0px 4px 8px rgba(0, 0, 0, 0.1)';">
+                    <img src="{% static 'img/medical.jpg' %}" alt="Medical Billing"
+                         style="width: 250px; height: 150px; object-fit: cover; border-radius: 8px; margin-bottom: 15px;">
+                    <h5 style="font-size: 1.4rem; font-weight: bold; color:rgb(99, 19, 247);">Medical Billing Services</h5>
+                    <p style="font-size: 1.1rem; color: #555;">Streamlining healthcare billing and revenue cycle management with accuracy and compliance to maximize profitability.</p>
+                </div>
+            </div>
+            <!-- Software Development -->
+            <div class="col-md-6 col-lg-4 py-3">
+                <div style="background: #ffffff; border-radius: 8px; text-align: center; padding: 25px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease-in-out;"
+                     onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0px 6px 15px rgba(0, 0, 0, 0.2)';"
+                     onmouseout="this.style.transform='none'; this.style.boxShadow='0px 4px 8px rgba(0, 0, 0, 0.1)';">
+                    <img src="{% static 'img/software.jpg' %}" alt="Software Development"
+                         style="width: 250px; height: 150px; object-fit: cover; border-radius: 8px; margin-bottom: 15px;">
+                    <h5 style="font-size: 1.4rem; font-weight: bold; color: rgb(99, 19, 247);">Software Development</h5>
+                    <p style="font-size: 1.1rem; color: #555;">Delivering tailored software solutions, web applications, and automation tools to drive business efficiency and digital transformation.</p>
+                </div>
+            </div>
+            <!-- Content Writing -->
+            <div class="col-md-6 col-lg-4 py-3">
+                <div style="background: #ffffff; border-radius: 8px; text-align: center; padding: 25px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease-in-out;"
+                     onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0px 6px 15px rgba(0, 0, 0, 0.2)';"
+                     onmouseout="this.style.transform='none'; this.style.boxShadow='0px 4px 8px rgba(0, 0, 0, 0.1)';">
+                    <img src="{% static 'img/content.jpg' %}" alt="Content Writing"
+                         style="width: 250px; height: 150px; object-fit: cover; border-radius: 8px; margin-bottom: 15px;">
+                    <h5 style="font-size: 1.4rem; font-weight: bold; color: rgb(99, 19, 247);">Construction Estimation</h5>
+                    <p style="font-size: 1.1rem; color: #555;">We specialize in delivering comprehensive construction estimation services that empower clients to plan with confidence and precision from the very start of their projects.</p>
+                </div>
+            </div>
+            <!-- Digital Marketing -->
+            <div class="col-md-6 col-lg-4 py-3">
+                <div style="background: #ffffff; border-radius: 8px; text-align: center; padding: 25px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease-in-out;"
+                     onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0px 6px 15px rgba(0, 0, 0, 0.2)';"
+                     onmouseout="this.style.transform='none'; this.style.boxShadow='0px 4px 8px rgba(0, 0, 0, 0.1)';">
+                    <img src="{% static 'img/marketing.jpg' %}" alt="Digital Marketing"
+                         style="width: 250px; height: 150px; object-fit: cover; border-radius: 8px; margin-bottom: 15px;">
+                    <h5 style="font-size: 1.4rem; font-weight: bold; color: rgb(99, 19, 247);">Digital Marketing</h5>
+                    <p style="font-size: 1.1rem; color: #555;">Driving brand growth through SEO, social media management, PPC advertising, and content marketing strategies.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 py-3">
+              <div style="background: #ffffff; border-radius: 8px; text-align: center; padding: 25px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease-in-out;"
+                   onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0px 6px 15px rgba(0, 0, 0, 0.2)';"
+                   onmouseout="this.style.transform='none'; this.style.boxShadow='0px 4px 8px rgba(0, 0, 0, 0.1)';">
+                  <img src="{% static 'img/it.jpg' %}" alt="Digital Marketing"
+                       style="width: 250px; height: 150px; object-fit: cover; border-radius: 8px; margin-bottom: 15px;">
+                  <h5 style="font-size: 1.4rem; font-weight: bold; color:rgb(99, 19, 247);">IT Consultancy</h5>
+                  <p style="font-size: 1.1rem; color: #555;">Providing expert IT consulting services to optimize technology infrastructure, enhance security, and drive digital transformation for businesses.</p>
+                  .</p>
+              </div>
+          </div>
+        </div>
+    </div>
+</div>
+<div class="container py-5">
+  <div class="text-center mb-4">
+      <h2 style="font-size: 2.5rem; font-weight: bold; color: #333;">Why Choose Us?</h2>
+      <p style="font-size: 1.1rem; color: #555; max-width: 700px; margin: auto;">
+          We provide top-notch services tailored to your business needs, ensuring quality and satisfaction.
+      </p>
+  </div>
+  <div class="row align-items-center">
+      <div class="col-lg-6 mb-4 mb-lg-0">
+          <img src="{% static 'img/consulting.jpg' %}" alt="Business Meeting" style="width: 100%; border-radius: 10px;">
+      </div>
+      <div class="col-lg-6">
+          <div class="d-flex align-items-start mb-3">
+              <div style="font-size: 2rem; color: rgb(99, 19, 247); margin-right: 15px;">
+                  &#128188; <!-- Briefcase Icon -->
+              </div>
+              <div>
+                  <h5 style="color: rgb(99, 19, 247); font-weight: bold;">Professional Expertise</h5>
+                  <p style="color: #555;">Our team consists of industry experts with years of experience in their respective fields.</p>
+              </div>
+          </div>
+          <div class="d-flex align-items-start mb-3">
+              <div style="font-size: 2rem; color: rgb(99, 19, 247); margin-right: 15px;">
+                  &#128200; <!-- Bar Chart Icon -->
+              </div>
+              <div>
+                  <h5 style="color: rgb(99, 19, 247); font-weight: bold;">Data-Driven Strategies</h5>
+                  <p style="color: #555;">We use analytics and insights to ensure optimal results for our clients.</p>
+              </div>
+          </div>
+          <div class="d-flex align-items-start">
+              <div style="font-size: 2rem; color: rgb(99, 19, 247); margin-right: 15px;">
+                  &#128161; <!-- Lightbulb Icon -->
+              </div>
+              <div>
+                  <h5 style="color: rgb(99, 19, 247); font-weight: bold;">Innovative Solutions</h5>
+                  <p style="color: #555;">We deliver creative and customized solutions that set your business apart.</p>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+<div class="page-section">
+  <div class="container">
+      <div class="row align-items-center">
+          <!-- Text Content -->
+          <div class="col-lg-6 py-3 wow fadeInLeft">
+              <h2 class="title-section">We're <span class="marked">ready to</span> Serve you with the Best</h2>
+              <div class="divider"></div>
+              <p class="mb-5">
+                  We provide marketing services to startups & small businesses looking for a reliable partner for their digital media, design, development, lead generation, and communication strategies.
+              </p>
+              <a href="#" class="btn btn-primary">More Details</a>
+          </div>
+          <!-- Image Section with Increased Size -->
+          <div class="col-lg-6 py-3 wow zoomIn">
+              <div class="img-place text-center">
+                  <img src="{% static 'img/team.jpg' %}" alt="Meeting Image"
+                       style="width: 100%; max-width: 600px; height: auto; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0,0,0,0.2);">
+              </div>
+          </div>
+      </div>
+  </div> <!-- .container -->
+</div>
+ <!-- .page-section -->
+
+    <div class="page-section">
+      <div class="container">
+        <div class="text-center wow fadeInUp">
+          <div class="subhead">Why Choose Us</div>
+          <h2 class="title-section">Your <span class="marked">Comfort</span> is Our Priority</h2>
+          <div class="divider mx-auto"></div>
+        </div>
+
+        <div class="row mt-5 text-center">
+          <div class="col-lg-4 py-3 wow fadeInUp">
+            <div class="display-3"><span class="mai-shapes"></span></div>
+            <h5>High Performance</h5>
+            <p>Our services are optimized for maximum efficiency, ensuring you get the best results in the shortest time possible.</p>
+          </div>
+          <div class="col-lg-4 py-3 wow fadeInUp">
+            <div class="display-3"><span class="mai-shapes"></span></div>
+            <h5>Friendly Prices</h5>
+            <p>We offer budget-friendly solutions without compromising on quality, making professional services accessible to all.</p>
+          </div>
+          <div class="col-lg-4 py-3 wow fadeInUp">
+            <div class="display-3"><span class="mai-shapes"></span></div>
+            <h5>No time-confusing</h5>
+            <p>Our streamlined processes eliminate unnecessary delays, helping you save valuable time and focus on what truly matters.</p>
+          </div>
+        </div>
+      </div> <!-- .container -->
+    </div> <!-- .page-section -->
+
+    <div class="page-section">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6 py-3 wow fadeInUp">
+            <h2 class="title-section">Get in Touch</h2>
+            <div class="divider"></div>
+            <p>Our highly trained team offers 24/7 support, ensuring every interaction is handled with expertise,
+              efficiency, and compliance,<br> so your operations run smoothly without interruption</p>
+
+            <ul class="contact-list">
+              <li>
+                <div class="icon"><span class="mai-map"></span></div>
+                <div class="content">699 Atlantic City Blvd, Bayville,NJ,USA</div>
+              </li>
+              <li>
+                <div class="icon"><span class="mai-mail"></span></div>
+                <div class="content"><a href="#">www.grsservices.co</a></div>
+              </li>
+              <li>
+                <div class="icon"><span class="mai-phone-portrait"></span></div>
+                <div class="content"><a href="#">+1 (609) 928-6025</a></div>
+              </li>
+            </ul>
+          </div>
+          <div class="col-lg-6 py-3 wow fadeInUp">
+            <div class="subhead">Contact Us</div>
+            <h2 class="title-section">Drop Us a Line</h2>
+            <div class="divider"></div>
+
+            <form action="" method="post">
+              {% csrf_token %}
+              <div class="py-2">
+                <input type="text" name="full_name" class="form-control" placeholder="Full name">
+              </div>
+              <div class="py-2">
+                <input type="email" name="email" class="form-control" placeholder="Email">
+              </div>
+              <div class="py-2">
+                <textarea rows="6" name="message" class="form-control" placeholder="Enter message"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary rounded-pill mt-4">Send Message</button>
+            </form>
+
+          </div>
+        </div>
+      </div> <!-- .container -->
+    </div> <!-- .page-section -->
+
+    <div class="page-section client-section">
+      <div class="container-fluid">
+        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 justify-content-center">
+          <div class="item wow zoomIn">
+            <img src="{%static 'img/clients/airbnb.png'%}" alt="">
+          </div>
+          <div class="item wow zoomIn">
+            <img src="{%static 'img/clients/google.png'%}" alt="">
+          </div>
+          <div class="item wow zoomIn">
+            <img src="{%static 'img/clients/stripe.png'%}" alt="">
+          </div>
+          <div class="item wow zoomIn">
+            <img src="{%static 'img/clients/paypal.png'%}" alt="">
+          </div>
+          <div class="item wow zoomIn">
+            <img src="{%static 'img/clients/mailchimp.png'%}" alt="">
+          </div>
+        </div>
+      </div> <!-- .container-fluid -->
+    </div> <!-- .page-section -->
+  </main>
+{%endblock%}

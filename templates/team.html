@@ -1,0 +1,113 @@
+{% extends 'templates/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container mt-5">
+  <!-- Page Banner -->
+  <div class="page-banner" style="background-image: url('{% static 'img/img_bg_1.jpg' %}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-md-6 text-center">
+        <nav aria-label="breadcrumb">
+          <ul class="breadcrumb justify-content-center py-0 bg-transparent">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+            <li class="breadcrumb-item active">Team</li>
+          </ul>
+        </nav>
+        <h1 class="text-white">Meet Our Team</h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Call Center Team Section -->
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Our Call Center Team</h2>
+  <div class="row">
+    <div class="col-md-4 text-center">
+      <img src="{% static 'img/shahmeer.png' %}"
+           class="mb-3"
+           alt="Call Center Agent"
+           style="width:300px; height:300px; object-fit:cover;">
+      <h4>Muhammad Shahmeer Raja</h4>
+      <p>Customer Support Manager</p>
+    </div>
+    <div class="col-md-4 text-center">
+      <img src="{% static 'img/ahmedimg.png' %}"
+           class="mb-3"
+           alt="Call Center Agent"
+           style="width:300px; height:300px; object-fit:cover;">
+      <h4>Ahmed Qureshi</h4>
+      <p>Senior Support Representative</p>
+    </div>
+    <div class="col-md-4 text-center">
+      <img src="{% static 'img/umer.jpeg' %}"
+           class="mb-3"
+           alt="Call Center Agent"
+           style="width:300px; height:300px; object-fit:cover;">
+      <h4>Umer Sheikh</h4>
+      <p>Technical Support Specialist</p>
+    </div>
+  </div>
+</div>
+
+<!-- Software Team Section -->
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Our Software Team</h2>
+  <div class="row">
+    <div class="col-md-4 text-center">
+      <img src="{% static 'img/hamzaimg.png' %}"
+           class="mb-3"
+           alt="Developer"
+           style="width:300px; height:300px; object-fit:cover;">
+      <h4>Hamza Tarazi</h4>
+      <p>Full Stack Developer</p>
+    </div>
+    <div class="col-md-4 text-center">
+      <img src="{% static 'img/aws.jpg' %}"
+           class="mb-3"
+           alt="Cloud Engineer"
+           style="width:300px; height:300px; object-fit:cover;">
+      <h4>Michael Lee</h4>
+      <p>AWS Expert</p>
+    </div>
+    <div class="col-md-4 text-center">
+      <img src="{% static 'img/jamal.jfif' %}"
+           class="mb-3"
+           alt="Front End Developer"
+           style="width:300px; height:300px; object-fit:cover;">
+      <h4>Muhammad Jamal Raja</h4>
+      <p>Front End Developer</p>
+    </div>
+  </div>
+</div>
+
+<!-- Medical Team Section -->
+<div class="container mt-5 mb-5">
+  <h2 class="text-center mb-4">Our Medical Team</h2>
+  <div class="row">
+    <div class="col-md-4 text-center">
+      <img src="{% static 'img/dr.jpg' %}"
+           class="mb-3"
+           alt="Chief Medical Officer"
+           style="width:300px; height:300px; object-fit:cover;">
+      <h4>Dr. Shehzad Malik</h4>
+      <p>Chief Medical Officer</p>
+    </div>
+    <div class="col-md-4 text-center">
+      <img src="{% static 'img/coder.jpg' %}"
+           class="mb-3"
+           alt="Senior Coder"
+           style="width:300px; height:300px; object-fit:cover;">
+      <h4>Michael Lee</h4>
+      <p>Senior Coder</p>
+    </div>
+    <div class="col-md-4 text-center">
+      <img src="{% static 'img/report.jpg' %}"
+           class="mb-3"
+           alt="Report Analyst"
+           style="width:300px; height:300px; object-fit:cover;">
+      <h4>Dr. Emily Brown</h4>
+      <p>Report Analyst</p>
+    </div>
+  </div>
+</div>
+{% endblock %}
