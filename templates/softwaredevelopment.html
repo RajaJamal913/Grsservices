@@ -37,7 +37,7 @@
   .title-section {
     font-size: 2.5rem;
     font-weight: 600;
-    background: linear-gradient(45deg, #007bff, #00d4ff);
+    background: linear-gradient(45deg, #007bff, #0056b3);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     display: inline-block;
@@ -187,6 +187,54 @@
     justify-content: center;
     color: #007bff;
     margin-right: 1rem;
+  }
+  /* Pricing card additions */
+  .pricing-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem 1.5rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    height: 100%;
+    border: none;
+    text-align: center;
+  }
+  .pricing-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,123,255,0.15);
+  }
+  .price-tag {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #007bff;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+  .price-tag small {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: #6c757d;
+  }
+  .pricing-feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+    text-align: left;
+  }
+  .pricing-feature-list li {
+    padding: 0.4rem 0;
+    border-bottom: 1px dashed #e9ecef;
+  }
+  .pricing-feature-list li i {
+    color: #28a745;
+    margin-right: 0.5rem;
+  }
+  .pricing-note {
+    background: #f8f9fa;
+    border-radius: 50px;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    color: #495057;
   }
 </style>
 
@@ -373,6 +421,75 @@
       </div>
     </div>
   </section>
+
+  <!-- ========== NEW PRICING PLANS SECTION ========== -->
+  <div class="container my-5" data-aos="fade-up">
+    <h2 class="text-center title-section">Simple, Transparent Pricing</h2>
+    <p class="text-center section-subtitle">Fixed‑price packages to get you started – plus custom enterprise options</p>
+    <div class="row g-4 mt-4 justify-content-center">
+      <!-- Website Plan -->
+      <div class="col-lg-4 col-md-6" data-aos="flip-left" data-aos-delay="100">
+        <div class="pricing-card">
+          <div class="service-icon">
+            <i class="fas fa-laptop-code"></i>
+          </div>
+          <h3>Website Launch</h3>
+          <div class="price-tag">$100 <small>fixed</small></div>
+          <p class="text-muted">Custom website + 2 maintenance sessions</p>
+          <ul class="pricing-feature-list">
+            <li><i class="fas fa-check-circle"></i> Responsive, modern design (up to 5 pages)</li>
+            <li><i class="fas fa-check-circle"></i> Contact form & basic SEO</li>
+            <li><i class="fas fa-check-circle"></i> 2 post‑launch maintenance sessions</li>
+            <li><i class="fas fa-check-circle"></i> 30 days free support</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary btn-custom mt-3">Choose Plan</a>
+        </div>
+      </div>
+      <!-- App Plan -->
+      <div class="col-lg-4 col-md-6" data-aos="flip-left" data-aos-delay="200">
+        <div class="pricing-card">
+          <div class="service-icon">
+            <i class="fas fa-mobile-alt"></i>
+          </div>
+          <h3>App Launch</h3>
+          <div class="price-tag">$100 <small>fixed</small></div>
+          <p class="text-muted">Mobile app + 2 maintenance sessions</p>
+          <ul class="pricing-feature-list">
+            <li><i class="fas fa-check-circle"></i> iOS or Android (or cross‑platform)</li>
+            <li><i class="fas fa-check-circle"></i> Up to 3 core screens / features</li>
+            <li><i class="fas fa-check-circle"></i> 2 post‑launch maintenance sessions</li>
+            <li><i class="fas fa-check-circle"></i> App store submission assistance</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary btn-custom mt-3">Choose Plan</a>
+        </div>
+      </div>
+      <!-- Enterprise / Cloud -->
+      <div class="col-lg-4 col-md-8" data-aos="flip-left" data-aos-delay="300">
+        <div class="pricing-card bg-light border-0">
+          <div class="service-icon">
+            <i class="fas fa-cloud-upload-alt"></i>
+          </div>
+          <h3>Enterprise & Cloud</h3>
+          <div class="price-tag">Custom</div>
+          <p class="text-muted">Tailored for advanced needs</p>
+          <ul class="pricing-feature-list">
+            <li><i class="fas fa-cogs"></i> AWS / Azure / Google Cloud setup</li>
+            <li><i class="fas fa-cogs"></i> CI/CD pipelines & DevOps</li>
+            <li><i class="fas fa-cogs"></i> Scalable microservices / serverless</li>
+            <li><i class="fas fa-cogs"></i> Custom integrations & enterprise features</li>
+          </ul>
+          <div class="pricing-note mt-3">
+            <i class="fas fa-info-circle me-2"></i>Additional charges apply based on scope
+          </div>
+          <a href="#contact" class="btn btn-outline-primary btn-custom mt-3">Request Quote</a>
+        </div>
+      </div>
+    </div>
+    <p class="text-center text-muted mt-4">
+      <i class="fas fa-clock me-2"></i>All plans include free consultation and project roadmap.
+    </p>
+  </div>
+  <!-- ========== END PRICING PLANS ========== -->
 
   <!-- Contact Section -->
   <section id="contact" class="container my-5" data-aos="fade-up">

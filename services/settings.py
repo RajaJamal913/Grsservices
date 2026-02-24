@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-io91!tlfc$hzp$awo@#gx=!u-s(jvbi9z(gz!$7&v6&=qdc!47'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # settings.py — minimal fix for local dev + your domain
 ALLOWED_HOSTS = ['www.grsservices.co', '127.0.0.1', 'localhost']
