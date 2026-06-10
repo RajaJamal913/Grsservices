@@ -173,8 +173,8 @@ def callcenter(request):
     # GET -> render template
     return render(request, 'templates/callcenter.html')
 
-def digitalmarketing(request):
-    return render(request, 'templates/digitalmarketing.html')
+def gis(request):
+    return render(request, 'templates/gis.html')
 
 
 def medicalbilling(request):
