@@ -1,0 +1,495 @@
+{% extends 'templates/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Add AOS & Font Awesome (if not already in base) -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+  /* Global enhancements (reuse from other pages) */
+  .page-banner {
+    position: relative;
+    background-attachment: fixed;
+    border-radius: 0 0 50px 50px;
+    overflow: hidden;
+    padding: 100px 0;
+  }
+  .page-banner .overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+  }
+  .page-banner .container {
+    position: relative;
+    z-index: 2;
+  }
+  .page-banner h1 {
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    font-size: 3.2rem;
+    font-weight: 700;
+  }
+  .breadcrumb-item a, .breadcrumb-item.active {
+    color: #f8f9fa !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  }
+  .title-section {
+    font-size: 2.5rem;
+    font-weight: 600;
+    background: linear-gradient(45deg, #007bff, #00d4ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+  }
+  .marked {
+    background: none;
+    -webkit-text-fill-color: #007bff;
+    font-weight: 700;
+  }
+  .divider {
+    width: 80px;
+    height: 4px;
+    background: #007bff;
+    margin: 20px 0;
+    border-radius: 2px;
+  }
+  .service-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem 1.5rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    height: 100%;
+    border: none;
+  }
+  .service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,123,255,0.1);
+  }
+  .service-icon {
+    font-size: 2.5rem;
+    color: #007bff;
+    margin-bottom: 1rem;
+    transition: transform 0.3s;
+  }
+  .service-card:hover .service-icon {
+    transform: scale(1.2) rotate(5deg);
+  }
+  .service-card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+  }
+  .service-card p {
+    color: #6c757d;
+    margin-bottom: 1rem;
+  }
+  .bullet-list {
+    list-style: none;
+    padding: 0;
+  }
+  .bullet-list li {
+    padding-left: 25px;
+    position: relative;
+    margin-bottom: 8px;
+    color: #555;
+  }
+  .bullet-list li i {
+    position: absolute;
+    left: 0;
+    top: 3px;
+    color: #6f42c1;
+    font-size: 1rem;
+  }
+  .metric-item {
+    text-align: center;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s;
+    height: 100%;
+  }
+  .metric-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,123,255,0.1);
+  }
+  .metric-item h3 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #007bff;
+    margin-bottom: 0.25rem;
+  }
+  .step-item {
+    margin-bottom: 1.5rem;
+  }
+  .step-number {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background: #007bff;
+    color: white;
+    border-radius: 50%;
+    font-weight: 700;
+    margin-right: 1rem;
+  }
+  .btn-custom {
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s;
+  }
+  .btn-custom:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,123,255,0.3);
+  }
+  .bg-soft {
+    background: #f8faff;
+    border-radius: 30px;
+    padding: 3rem 1.5rem;
+    margin: 2rem 0;
+  }
+  .rounded-image {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+  }
+  .rounded-image img {
+    transition: transform 0.5s;
+    width: 100%;
+    height: auto;
+  }
+  .rounded-image:hover img {
+    transform: scale(1.02);
+  }
+  .industry-card {
+    background: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    height: 100%;
+    transition: transform 0.3s;
+    text-align: center;
+  }
+  .industry-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,123,255,0.1);
+  }
+  .industry-card h5 {
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  .results-gradient {
+    background: linear-gradient(135deg, #007bff, #6610f2);
+    border-radius: 30px;
+    padding: 3rem 2rem;
+    color: white;
+  }
+  .results-gradient h3 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+  }
+  .cta-light {
+    background: #f8faff;
+    border-radius: 30px;
+    padding: 4rem 2rem;
+  }
+</style>
+
+<!-- Banner with overlay -->
+<div class="container-fluid px-0">
+  <div class="page-banner" style="background-image: url('{% static 'img/con1.avif' %}'); background-size: cover; background-position: center;">
+    <div class="overlay"></div>
+    <div class="container text-center">
+      <nav aria-label="breadcrumb">
+        <ul class="breadcrumb justify-content-center py-0 bg-transparent">
+          <li class="breadcrumb-item"><a href="{% url 'index' %}" class="text-white"><i class="fas fa-home me-2"></i>Home</a></li>
+          <li class="breadcrumb-item active text-white" aria-current="page">Bookkeeping Services</li>
+        </ul>
+      </nav>
+      <h1 class="display-4 fw-bold" data-aos="fade-down">Bookkeeping Services</h1>
+      <p class="lead text-white" data-aos="fade-up" data-aos-delay="100">Accurate, organized, and insightful financial records for your business</p>
+    </div>
+  </div>
+</div>
+
+<main>
+  <!-- Intro Section -->
+  <div class="page-section">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6 py-3" data-aos="fade-right">
+          <div class="rounded-image">
+            <img src="{% static 'img/con2.avif' %}" alt="Bookkeeping Team" class="img-fluid">
+          </div>
+        </div>
+        <div class="col-lg-6 py-3" data-aos="fade-left">
+          <h2 class="title-section">Precision <span class="marked">in Every</span> Entry</h2>
+          <div class="divider"></div>
+          <p class="lead text-muted">Our professional bookkeepers ensure your financial records are always accurate, up‑to‑date, and compliant. We turn raw data into clear financial pictures so you can make confident business decisions.</p>
+          <div class="mt-4">
+            <a href="{% url 'contact' %}" class="btn btn-primary btn-custom me-3"><i class="fas fa-calculator me-2"></i>Request a Consultation</a>
+            <a href="#services" class="btn btn-outline-primary btn-custom"><i class="fas fa-list me-2"></i>Our Services</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Services Section -->
+  <section id="services" class="bg-soft my-5" data-aos="fade-up">
+    <div class="container">
+      <h2 class="text-center title-section">Our Bookkeeping Services</h2>
+      <p class="text-center section-subtitle">Comprehensive solutions tailored to your business</p>
+      <div class="row g-4 mt-4">
+        <!-- Daily Bookkeeping -->
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-book-open"></i>
+            </div>
+            <h3>Daily Bookkeeping</h3>
+            <p>Meticulous recording of all financial transactions – sales, purchases, receipts, and payments – to keep your books current and accurate.</p>
+            <ul class="bullet-list">
+              <li><i class="fas fa-check-circle"></i> Transaction categorization</li>
+              <li><i class="fas fa-check-circle"></i> Bank & credit card reconciliation</li>
+              <li><i class="fas fa-check-circle"></i> Expense tracking</li>
+            </ul>
+          </div>
+        </div>
+        <!-- Accounts Payable/Receivable -->
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="150">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-file-invoice-dollar"></i>
+            </div>
+            <h3>Accounts Payable & Receivable</h3>
+            <p>Efficient management of what you owe and what you’re owed, helping you maintain healthy cash flow and vendor relationships.</p>
+            <ul class="bullet-list">
+              <li><i class="fas fa-check-circle"></i> Invoice processing & payment</li>
+              <li><i class="fas fa-check-circle"></i> Aging reports & collections</li>
+              <li><i class="fas fa-check-circle"></i> Vendor management</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row g-4 mt-2">
+        <!-- Payroll Processing -->
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <h3>Payroll Processing</h3>
+            <p>Accurate and timely payroll so your employees are paid correctly and all tax obligations are met without hassle.</p>
+            <ul class="bullet-list">
+              <li><i class="fas fa-check-circle"></i> Salary & wage calculations</li>
+              <li><i class="fas fa-check-circle"></i> Tax withholding & filings</li>
+              <li><i class="fas fa-check-circle"></i> Direct deposit setup</li>
+            </ul>
+          </div>
+        </div>
+        <!-- Financial Reporting -->
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="250">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-chart-pie"></i>
+            </div>
+            <h3>Financial Reporting</h3>
+            <p>Clear, insightful reports that help you understand your business’s financial health and support strategic planning.</p>
+            <ul class="bullet-list">
+              <li><i class="fas fa-check-circle"></i> Profit & Loss statements</li>
+              <li><i class="fas fa-check-circle"></i> Balance sheets</li>
+              <li><i class="fas fa-check-circle"></i> Cash flow statements</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row g-4 mt-2">
+        <!-- Tax Preparation Support -->
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-file-invoice"></i>
+            </div>
+            <h3>Tax Preparation Support</h3>
+            <p>Well‑organized records and schedules that make tax season smooth and ensure you capture every deduction.</p>
+            <ul class="bullet-list">
+              <li><i class="fas fa-check-circle"></i> 1099 preparation</li>
+              <li><i class="fas fa-check-circle"></i> Sales tax tracking</li>
+              <li><i class="fas fa-check-circle"></i> Year‑end closing</li>
+            </ul>
+          </div>
+        </div>
+        <!-- Catch‑Up Bookkeeping -->
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="350">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <h3>Catch‑Up Bookkeeping</h3>
+            <p>If your books have fallen behind, we’ll bring them up to date quickly and accurately, giving you a clean starting point.</p>
+            <ul class="bullet-list">
+              <li><i class="fas fa-check-circle"></i> Historical data cleanup</li>
+              <li><i class="fas fa-check-circle"></i> Prior period adjustments</li>
+              <li><i class="fas fa-check-circle"></i> System setup</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Section -->
+  <div class="container my-5" data-aos="fade-up">
+    <div class="row align-items-center g-5">
+      <div class="col-md-5" data-aos="fade-right">
+        <div class="rounded-image">
+          <img src="{% static 'img/con3.avif' %}" alt="Bookkeeping Process">
+        </div>
+      </div>
+      <div class="col-md-7" data-aos="fade-left">
+        <h2 class="title-section">Our <span class="marked">Streamlined</span> Process</h2>
+        <div class="divider"></div>
+        <p class="lead text-muted">We follow a proven methodology to ensure your books are always accurate, compliant, and delivered on time.</p>
+        <div class="row mt-4">
+          <div class="col-md-6 step-item">
+            <h4><span class="step-number">1</span> Discovery & Setup</h4>
+            <p class="text-muted">We learn about your business, chart of accounts, and software preferences to tailor our approach.</p>
+          </div>
+          <div class="col-md-6 step-item">
+            <h4><span class="step-number">2</span> Daily/Weekly Data Entry</h4>
+            <p class="text-muted">Transactions are recorded consistently, and accounts are reconciled to keep everything current.</p>
+          </div>
+          <div class="col-md-6 step-item">
+            <h4><span class="step-number">3</span> Review & Reconciliation</h4>
+            <p class="text-muted">We double‑check entries, resolve discrepancies, and ensure every transaction is accounted for.</p>
+          </div>
+          <div class="col-md-6 step-item">
+            <h4><span class="step-number">4</span> Reporting & Insights</h4>
+            <p class="text-muted">Regular financial reports are delivered along with actionable insights to guide your decisions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Industries Section -->
+  <section class="bg-soft my-5" data-aos="fade-up">
+    <div class="container">
+      <h2 class="text-center title-section">Industries We Serve</h2>
+      <p class="text-center section-subtitle">Specialized bookkeeping for diverse sectors</p>
+      <div class="row g-4 mt-4">
+        <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="100">
+          <div class="industry-card">
+            <i class="fas fa-store fa-3x text-primary mb-3"></i>
+            <h5>Small Business & Retail</h5>
+            <p class="text-muted">Day‑to‑day sales, inventory, and expense tracking.</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="150">
+          <div class="industry-card">
+            <i class="fas fa-stethoscope fa-3x text-primary mb-3"></i>
+            <h5>Healthcare</h5>
+            <p class="text-muted">Patient billing, insurance claims, and compliance.</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="200">
+          <div class="industry-card">
+            <i class="fas fa-hammer fa-3x text-primary mb-3"></i>
+            <h5>Construction</h5>
+            <p class="text-muted">Job costing, subcontractor payments, and progress billing.</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="250">
+          <div class="industry-card">
+            <i class="fas fa-utensils fa-3x text-primary mb-3"></i>
+            <h5>Restaurants & Hospitality</h5>
+            <p class="text-muted">High‑volume transactions, tip reporting, and vendor management.</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="300">
+          <div class="industry-card">
+            <i class="fas fa-laptop fa-3x text-primary mb-3"></i>
+            <h5>Professional Services</h5>
+            <p class="text-muted">Time‑based billing, expense reimbursement, and trust accounting.</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="350">
+          <div class="industry-card">
+            <i class="fas fa-truck fa-3x text-primary mb-3"></i>
+            <h5>Logistics & Transportation</h5>
+            <p class="text-muted">Fuel tracking, maintenance costs, and per‑diem calculations.</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="400">
+          <div class="industry-card">
+            <i class="fas fa-building fa-3x text-primary mb-3"></i>
+            <h5>Real Estate</h5>
+            <p class="text-muted">Rent rolls, property expenses, and depreciation schedules.</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="450">
+          <div class="industry-card">
+            <i class="fas fa-church fa-3x text-primary mb-3"></i>
+            <h5>Nonprofits</h5>
+            <p class="text-muted">Fund accounting, grant tracking, and donor management.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Results Section -->
+  <section class="container my-5" data-aos="fade-up">
+    <div class="results-gradient text-center p-5">
+      <h2 class="mb-5 display-5 fw-bold">The Impact of Professional Bookkeeping</h2>
+      <div class="row g-4">
+        <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="100">
+          <h3>+30%</h3>
+          <p class="lead">Average time saved on financial tasks</p>
+        </div>
+        <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="150">
+          <h3>99.5%</h3>
+          <p class="lead">Accuracy rate in transaction recording</p>
+        </div>
+        <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="200">
+          <h3>−25%</h3>
+          <p class="lead">Reduction in late payment penalties</p>
+        </div>
+        <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="250">
+          <h3>95%</h3>
+          <p class="lead">Client satisfaction with financial clarity</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="container my-5" data-aos="fade-up">
+    <div class="cta-light text-center p-5">
+      <h2 class="mb-4">Ready to Take Control of Your Books?</h2>
+      <p class="mb-4 lead text-muted">Let our expert bookkeepers handle the numbers so you can focus on growing your business.</p>
+      <a href="{% url 'contact' %}" class="btn btn-primary btn-custom btn-lg px-5 py-3"><i class="fas fa-calendar-check me-2"></i>Start Your Bookkeeping Strategy</a>
+    </div>
+  </section>
+</main>
+
+<!-- AOS initialization -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 800,
+    easing: 'ease-in-out',
+    once: true,
+    mirror: false
+  });
+</script>
+{% endblock %}

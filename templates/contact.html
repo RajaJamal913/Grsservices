@@ -1,0 +1,221 @@
+{% extends 'templates/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Add AOS & Font Awesome (if not already in base) -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+  /* Global enhancements (reuse from other pages) */
+  .page-banner {
+    position: relative;
+    background-attachment: fixed;
+    border-radius: 0 0 50px 50px;
+    overflow: hidden;
+    padding: 100px 0;
+  }
+  .page-banner .overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+  }
+  .page-banner .container {
+    position: relative;
+    z-index: 2;
+  }
+  .page-banner h1 {
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    font-size: 3.2rem;
+    font-weight: 700;
+  }
+  .breadcrumb-item a, .breadcrumb-item.active {
+    color: #f8f9fa !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  }
+  .title-section {
+    font-size: 2.5rem;
+    font-weight: 600;
+    background: linear-gradient(45deg, #007bff, #00d4ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+  }
+  .divider {
+    width: 80px;
+    height: 4px;
+    background: #007bff;
+    margin: 20px 0;
+    border-radius: 2px;
+  }
+  .contact-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 2rem;
+  }
+  .contact-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+  }
+  .contact-list .icon {
+    width: 50px;
+    height: 50px;
+    background: rgba(0,123,255,0.1);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #007bff;
+    margin-right: 1rem;
+    font-size: 1.3rem;
+    transition: all 0.3s;
+  }
+  .contact-list li:hover .icon {
+    background: #007bff;
+    color: white;
+    transform: scale(1.1);
+  }
+  .contact-list .content {
+    color: #2c3e50;
+  }
+  .contact-list a {
+    color: #2c3e50;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .contact-list a:hover {
+    color: #007bff;
+  }
+  .form-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: transform 0.3s;
+  }
+  .form-card:hover {
+    box-shadow: 0 20px 40px rgba(0,123,255,0.1);
+  }
+  .form-control-custom {
+    border: 1px solid #e9ecef;
+    border-radius: 50px;
+    padding: 0.75rem 1.25rem;
+    transition: all 0.3s;
+  }
+  .form-control-custom:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.1);
+    outline: none;
+  }
+  textarea.form-control-custom {
+    border-radius: 20px;
+    resize: none;
+  }
+  .btn-custom {
+    padding: 12px 35px;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s;
+  }
+  .btn-custom:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,123,255,0.3);
+  }
+  .alert-success {
+    border-radius: 50px;
+    padding: 1rem 1.5rem;
+    margin-top: 1.5rem;
+  }
+</style>
+
+<!-- Banner with overlay -->
+<div class="container-fluid px-0">
+  <div class="page-banner" style="background-image: url('{% static 'img/msg.jpg' %}'); background-size: cover; background-position: center;">
+    <div class="overlay"></div>
+    <div class="container text-center">
+      <nav aria-label="breadcrumb">
+        <ul class="breadcrumb justify-content-center py-0 bg-transparent">
+          <li class="breadcrumb-item"><a href="{% url 'index' %}" class="text-white"><i class="fas fa-home me-2"></i>Home</a></li>
+          <li class="breadcrumb-item active text-white" aria-current="page">Contact</li>
+        </ul>
+      </nav>
+      <h1 class="display-4 fw-bold" data-aos="fade-down">Contact Us</h1>
+      <p class="lead text-white" data-aos="fade-up" data-aos-delay="100">We're here to help 24/7 – reach out anytime</p>
+    </div>
+  </div>
+</div>
+
+<main>
+  <div class="page-section">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+        <!-- Left side: Contact info -->
+        <div class="col-lg-6 py-3" data-aos="fade-right">
+          <div class="subhead text-primary">Get in Touch</div>
+          <h2 class="title-section">We'd Love to Hear From You</h2>
+          <div class="divider"></div>
+          <p class="lead text-muted">Our highly trained team offers 24/7 support, ensuring every interaction is handled with expertise, efficiency, and compliance, so your operations run smoothly without interruption.</p>
+          <ul class="contact-list">
+            <li>
+              <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+              <div class="content">699 Atlantic City Blvd, Bayville, NJ, USA</div>
+            </li>
+            <li>
+              <div class="icon"><i class="fas fa-globe"></i></div>
+              <div class="content"><a href="https://www.grsservices.co">www.grsservices.co</a></div>
+            </li>
+            <li>
+              <div class="icon"><i class="fas fa-phone-alt"></i></div>
+              <div class="content"><a href="tel:+16099286025">+1 (609) 928-6025</a></div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Right side: Contact form -->
+        <div class="col-lg-6 py-3" data-aos="fade-left">
+          <div class="form-card">
+            <div class="subhead text-primary">Contact Us</div>
+            <h2 class="title-section">Drop Us a Line</h2>
+            <div class="divider"></div>
+            <form method="post" action="">
+              {% csrf_token %}
+              <div class="mb-3">
+                <input type="text" name="full_name" class="form-control form-control-custom" placeholder="Full name" required>
+              </div>
+              <div class="mb-3">
+                <input type="email" name="email" class="form-control form-control-custom" placeholder="Email address" required>
+              </div>
+              <div class="mb-3">
+                <textarea name="message" rows="5" class="form-control form-control-custom" placeholder="How can we help you?" required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-custom mt-2"><i class="fas fa-paper-plane me-2"></i>Send Message</button>
+            </form>
+            {% if thank_you_message %}
+            <div class="alert alert-success alert-dismissible fade show mt-4" role="alert">
+              <i class="fas fa-check-circle me-2"></i>
+              <strong>Success!</strong> {{ thank_you_message }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- AOS initialization -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 800,
+    easing: 'ease-in-out',
+    once: true,
+    mirror: false
+  });
+</script>
+{% endblock %}

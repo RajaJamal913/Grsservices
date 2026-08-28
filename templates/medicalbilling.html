@@ -1,0 +1,415 @@
+{% extends 'templates/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Add AOS & Font Awesome (if not already in base) -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+  /* Global enhancements (reuse from other pages) */
+  .page-banner {
+    position: relative;
+    background-attachment: fixed;
+    border-radius: 0 0 50px 50px;
+    overflow: hidden;
+    padding: 100px 0;
+  }
+  .page-banner .overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+  }
+  .page-banner .container {
+    position: relative;
+    z-index: 2;
+  }
+  .page-banner h1 {
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    font-size: 3.2rem;
+    font-weight: 700;
+  }
+  .breadcrumb-item a, .breadcrumb-item.active {
+    color: #f8f9fa !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  }
+  .title-section {
+    font-size: 2.5rem;
+    font-weight: 600;
+    background: linear-gradient(45deg, #007bff, #00d4ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+  }
+  .marked {
+    background: none;
+    -webkit-text-fill-color: #007bff;
+    font-weight: 700;
+  }
+  .divider {
+    width: 80px;
+    height: 4px;
+    background: #007bff;
+    margin: 20px 0;
+    border-radius: 2px;
+  }
+  .service-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem 1.5rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    height: 100%;
+    border: none;
+  }
+  .service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,123,255,0.1);
+  }
+  .service-icon {
+    font-size: 2.5rem;
+    color: #007bff;
+    margin-bottom: 1rem;
+    transition: transform 0.3s;
+  }
+  .service-card:hover .service-icon {
+    transform: scale(1.2) rotate(5deg);
+  }
+  .service-card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+  }
+  .service-card p {
+    color: #6c757d;
+    margin-bottom: 1rem;
+  }
+  .bullet-list {
+    list-style: none;
+    padding: 0;
+  }
+  .bullet-list li {
+    padding-left: 25px;
+    position: relative;
+    margin-bottom: 8px;
+    color: #555;
+  }
+  .bullet-list li i {
+    position: absolute;
+    left: 0;
+    top: 3px;
+    color: #6f42c1;
+    font-size: 1rem;
+  }
+  .metric-item {
+    text-align: center;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s;
+    height: 100%;
+  }
+  .metric-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,123,255,0.1);
+  }
+  .metric-item h3 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #007bff;
+    margin-bottom: 0.25rem;
+  }
+  .benefit-item {
+    margin-bottom: 1.5rem;
+  }
+  .benefit-item h4 i {
+    color: #007bff;
+    margin-right: 10px;
+    font-size: 1.5rem;
+  }
+  .btn-custom {
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s;
+  }
+  .btn-custom:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,123,255,0.3);
+  }
+  .bg-soft {
+    background: #f8faff;
+    border-radius: 30px;
+    padding: 3rem 1.5rem;
+    margin: 2rem 0;
+  }
+  .rounded-image {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+  }
+  .rounded-image img {
+    transition: transform 0.5s;
+    width: 100%;
+    height: auto;
+  }
+  .rounded-image:hover img {
+    transform: scale(1.02);
+  }
+  .tech-card {
+    background: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    height: 100%;
+    transition: transform 0.3s;
+  }
+  .tech-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,123,255,0.1);
+  }
+  .results-gradient {
+    background: linear-gradient(135deg, #007bff, #6610f2);
+    border-radius: 30px;
+    padding: 3rem 2rem;
+    color: white;
+  }
+  .results-gradient h3 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+  }
+  .cta-light {
+    background: #f8faff;
+    border-radius: 30px;
+    padding: 4rem 2rem;
+  }
+</style>
+
+<!-- Banner with overlay -->
+<div class="container-fluid px-0">
+  <div class="page-banner" style="background-image: url('{% static 'img/bill3.avif' %}'); background-size: cover; background-position: center;">
+    <div class="overlay"></div>
+    <div class="container text-center">
+      <nav aria-label="breadcrumb">
+        <ul class="breadcrumb justify-content-center py-0 bg-transparent">
+          <li class="breadcrumb-item"><a href="{% url 'index' %}" class="text-white"><i class="fas fa-home me-2"></i>Home</a></li>
+          <li class="breadcrumb-item active text-white" aria-current="page">Medical Billing</li>
+        </ul>
+      </nav>
+      <h1 class="display-4 fw-bold" data-aos="fade-down">Medical Billing Services</h1>
+      <p class="lead text-white" data-aos="fade-up" data-aos-delay="100">Streamlined revenue cycle management for healthcare providers</p>
+    </div>
+  </div>
+</div>
+
+<main>
+  <!-- Intro Section -->
+  <div class="page-section">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6 py-3" data-aos="fade-right">
+          <div class="rounded-image">
+            <img src="{% static 'img/bill1.webp' %}" alt="Medical Billing Team" class="img-fluid">
+          </div>
+        </div>
+        <div class="col-lg-6 py-3" data-aos="fade-left">
+          <h2 class="title-section">Streamlined <span class="marked">Medical Billing</span> Solutions</h2>
+          <div class="divider"></div>
+          <p class="lead text-muted">Our comprehensive medical billing services ensure accurate claim submissions, faster reimbursements, and reduced administrative burdens for healthcare providers. We combine industry expertise with advanced technology to maximize your revenue cycle performance.</p>
+          <div class="mt-4">
+            <a href="{% url 'contact' %}" class="btn btn-primary btn-custom me-3"><i class="fas fa-calendar-check me-2"></i>Schedule Consultation</a>
+            <a href="{% url 'services' %}" class="btn btn-outline-primary btn-custom"><i class="fas fa-list me-2"></i>Our Services</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Services Section -->
+  <section id="services" class="bg-soft my-5" data-aos="fade-up">
+    <div class="container">
+      <h2 class="text-center title-section">Our Medical Billing Services</h2>
+      <p class="text-center section-subtitle">Comprehensive solutions for your revenue cycle</p>
+      <div class="row g-4 mt-4">
+        <!-- Claims Processing -->
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-file-invoice"></i>
+            </div>
+            <h3>Claims Processing</h3>
+            <p>Efficient and accurate claim submission to insurance providers with thorough verification to minimize rejections and delays.</p>
+            <ul class="bullet-list">
+              <li><i class="fas fa-check-circle"></i> Electronic claim submission</li>
+              <li><i class="fas fa-check-circle"></i> Primary and secondary claims</li>
+              <li><i class="fas fa-check-circle"></i> Real-time eligibility verification</li>
+            </ul>
+          </div>
+        </div>
+        <!-- Payment Posting -->
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="150">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-credit-card"></i>
+            </div>
+            <h3>Payment Posting</h3>
+            <p>Accurate and timely posting of insurance and patient payments with detailed reconciliation reports.</p>
+            <ul class="bullet-list">
+              <li><i class="fas fa-check-circle"></i> ERA/EFT processing</li>
+              <li><i class="fas fa-check-circle"></i> Patient payment posting</li>
+              <li><i class="fas fa-check-circle"></i> Denial management</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row g-4 mt-2">
+        <!-- Denial Management -->
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-exclamation-circle"></i>
+            </div>
+            <h3>Denial Management</h3>
+            <p>Proactive approach to identify, appeal, and prevent claim denials to maximize revenue recovery.</p>
+            <ul class="bullet-list">
+              <li><i class="fas fa-check-circle"></i> Denial analysis and reporting</li>
+              <li><i class="fas fa-check-circle"></i> Appeal preparation and submission</li>
+              <li><i class="fas fa-check-circle"></i> Prevention strategies</li>
+            </ul>
+          </div>
+        </div>
+        <!-- Patient Billing -->
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="250">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-user-md"></i>
+            </div>
+            <h3>Patient Billing</h3>
+            <p>Professional and compassionate patient billing services that improve collections while maintaining patient satisfaction.</p>
+            <ul class="bullet-list">
+              <li><i class="fas fa-check-circle"></i> Statement generation</li>
+              <li><i class="fas fa-check-circle"></i> Payment plan administration</li>
+              <li><i class="fas fa-check-circle"></i> Customer service support</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <div class="container my-5" data-aos="fade-up">
+    <div class="row align-items-center g-5">
+      <div class="col-md-5" data-aos="fade-right">
+        <div class="rounded-image">
+          <img src="{% static 'img/bill2.webp' %}" alt="Medical Billing Benefits">
+        </div>
+      </div>
+      <div class="col-md-7" data-aos="fade-left">
+        <h2 class="title-section">Benefits of Our <span class="marked">Medical Billing</span> Services</h2>
+        <div class="divider"></div>
+        <p class="lead text-muted">Our specialized medical billing services are designed to optimize your revenue cycle management, reduce administrative burdens, and improve financial performance.</p>
+        <div class="row mt-4">
+          <div class="col-md-6 benefit-item">
+            <h4><i class="fas fa-chart-line"></i> Increased Revenue</h4>
+            <p class="text-muted">Maximize collections with fewer denied claims and faster reimbursement cycles.</p>
+          </div>
+          <div class="col-md-6 benefit-item">
+            <h4><i class="fas fa-clock"></i> Time Savings</h4>
+            <p class="text-muted">Free up your staff to focus on patient care rather than administrative tasks.</p>
+          </div>
+          <div class="col-md-6 benefit-item">
+            <h4><i class="fas fa-shield-alt"></i> Compliance Assurance</h4>
+            <p class="text-muted">Stay current with ever-changing healthcare regulations and billing requirements.</p>
+          </div>
+          <div class="col-md-6 benefit-item">
+            <h4><i class="fas fa-chart-bar"></i> Detailed Reporting</h4>
+            <p class="text-muted">Access comprehensive reports for better financial decision-making.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Technology Section -->
+  <section class="bg-soft my-5" data-aos="fade-up">
+    <div class="container">
+      <h2 class="text-center title-section">Our Technology & Security</h2>
+      <p class="text-center section-subtitle">Enterprise-grade solutions with uncompromising security</p>
+      <div class="row g-4 mt-4">
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+          <div class="tech-card text-center">
+            <i class="fas fa-shield-alt fa-3x text-primary mb-3"></i>
+            <h5>HIPAA Compliant</h5>
+            <p class="text-muted">Our systems and processes are fully compliant with HIPAA regulations to protect patient information.</p>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="150">
+          <div class="tech-card text-center">
+            <i class="fas fa-laptop-code fa-3x text-primary mb-3"></i>
+            <h5>Advanced Software</h5>
+            <p class="text-muted">We utilize industry-leading billing software for efficient claim processing and management.</p>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+          <div class="tech-card text-center">
+            <i class="fas fa-lock fa-3x text-primary mb-3"></i>
+            <h5>Secure Data Exchange</h5>
+            <p class="text-muted">Encrypted data transmission ensures secure exchange of sensitive patient information.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Results Section -->
+  <section class="container my-5" data-aos="fade-up">
+    <div class="results-gradient text-center p-5">
+      <h2 class="mb-5 display-5 fw-bold">Our Medical Billing Results</h2>
+      <div class="row g-4">
+        <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="100">
+          <h3>98%</h3>
+          <p class="lead">Clean Claim Rate</p>
+        </div>
+        <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="150">
+          <h3>30%</h3>
+          <p class="lead">Faster Reimbursement</p>
+        </div>
+        <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="200">
+          <h3>85%</h3>
+          <p class="lead">Reduction in Denials</p>
+        </div>
+        <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="250">
+          <h3>99%</h3>
+          <p class="lead">Client Retention</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="container my-5" data-aos="fade-up">
+    <div class="cta-light text-center p-5">
+      <h2 class="mb-4">Ready to Optimize Your Medical Billing?</h2>
+      <p class="mb-4 lead text-muted">Let us handle your billing complexities so you can focus on patient care.</p>
+      <a href="{% url 'contact' %}" class="btn btn-primary btn-custom btn-lg px-5 py-3"><i class="fas fa-calendar-check me-2"></i>Get Started Today</a>
+    </div>
+  </section>
+</main>
+
+<!-- AOS initialization -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 800,
+    easing: 'ease-in-out',
+    once: true,
+    mirror: false
+  });
+</script>
+{% endblock %}

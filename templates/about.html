@@ -1,0 +1,281 @@
+{% extends 'templates/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Add AOS & Font Awesome (if not already in base) -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+  /* Custom enhancements (reuse services page styles + about-specific) */
+  .page-banner {
+    position: relative;
+    background-attachment: fixed;
+    border-radius: 0 0 50px 50px;
+    overflow: hidden;
+  }
+  .page-banner .overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+  }
+  .page-banner .row {
+    position: relative;
+    z-index: 2;
+    min-height: 350px;
+  }
+  .page-banner h1 {
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    font-size: 3.5rem;
+    font-weight: 700;
+  }
+  .breadcrumb-item a, .breadcrumb-item.active {
+    color: #f8f9fa !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  }
+  .title-section {
+    font-size: 2.5rem;
+    font-weight: 600;
+    background: linear-gradient(45deg, #007bff, #0056b3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+  }
+  .marked {
+    background: none;
+    -webkit-text-fill-color: #007bff;
+    font-weight: 700;
+  }
+  .divider {
+    width: 80px;
+    height: 4px;
+    background: #007bff;
+    margin: 20px 0;
+    border-radius: 2px;
+  }
+  .about-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    height: 100%;
+    border: none;
+  }
+  .about-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,123,255,0.1);
+  }
+  .about-card i {
+    font-size: 2.5rem;
+    color: #007bff;
+    margin-bottom: 1rem;
+    transition: transform 0.3s;
+  }
+  .about-card:hover i {
+    transform: scale(1.2) rotate(5deg);
+  }
+  .about-card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #2c3e50;
+  }
+  .bullet-list {
+    list-style: none;
+    padding: 0;
+  }
+  .bullet-list li {
+    padding-left: 30px;
+    position: relative;
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+  }
+  .bullet-list li i {
+    position: absolute;
+    left: 0;
+    top: 3px;
+    color: #6f42c1;
+    font-size: 1.2rem;
+  }
+  .section-bg {
+    background: #f8faff;
+    border-radius: 30px;
+    padding: 3rem 2rem;
+    margin: 3rem 0;
+  }
+  .btn-custom {
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s;
+  }
+  .btn-custom:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,123,255,0.3);
+  }
+  .rounded-image {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+  }
+  .rounded-image img {
+    transition: transform 0.5s ease;
+    width: 100%;
+    height: auto;
+  }
+  .rounded-image:hover img {
+    transform: scale(1.02);
+  }
+</style>
+
+<!-- Banner with overlay -->
+<div class="container-fluid px-0">
+  <div class="page-banner" style="background-image: url('{% static 'img/aboutus.jpg' %}'); background-size: cover; background-position: center;">
+    <div class="overlay"></div>
+    <div class="row justify-content-center align-items-center text-center" style="min-height: 350px;">
+      <div class="col-md-8" data-aos="fade-down">
+        <nav aria-label="Breadcrumb">
+          <ul class="breadcrumb justify-content-center py-0 bg-transparent">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}" class="text-white"><i class="fas fa-home me-2"></i>Home</a></li>
+            <li class="breadcrumb-item active text-white" aria-current="page">About</li>
+          </ul>
+        </nav>
+        <h1 class="display-4 fw-bold">About Us</h1>
+        <p class="lead text-white">Driving innovation through technology and expertise</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main>
+  <!-- Intro section with image and text -->
+  <div class="container my-5 py-4">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6" data-aos="fade-right">
+        <div class="rounded-image">
+          <img src="{% static 'img/meets.avif' %}" alt="Our Team" class="img-fluid">
+        </div>
+      </div>
+      <div class="col-lg-6" data-aos="fade-left">
+        <h2 class="title-section">We Are a <span class="marked">Results-Driven</span> Team</h2>
+        <div class="divider"></div>
+        <p class="lead text-muted">Our expertise lies in delivering cutting-edge solutions tailored to your business needs. From automation to analytics, we ensure seamless operations and measurable success.</p>
+        <div class="mt-4">
+          <a href="#" class="btn btn-primary btn-custom me-3"><i class="fas fa-rocket me-2"></i>Explore Our Solutions</a>
+          <a href="#" class="btn btn-outline-primary btn-custom"><i class="fas fa-star me-2"></i>Client Stories</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mission, Innovation, Team, Customer-Centric cards -->
+  <div class="container section-bg my-5">
+    <div class="row g-4">
+      <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+        <div class="about-card">
+          <i class="fas fa-bullseye"></i>
+          <h3>Our Mission</h3>
+          <p>We empower businesses with cutting-edge digital solutions. By integrating automation, secure processing, and user-friendly interfaces, we help businesses scale efficiently.</p>
+        </div>
+      </div>
+      <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+        <div class="about-card">
+          <i class="fas fa-lightbulb"></i>
+          <h3>Innovation</h3>
+          <p>We leverage AI-driven technology and real-time analytics to enhance efficiency. Our commitment to automation and optimization ensures streamlined business operations.</p>
+        </div>
+      </div>
+    </div>
+    <div class="row g-4 mt-2">
+      <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
+        <div class="about-card">
+          <i class="fas fa-users"></i>
+          <h3>Our Team</h3>
+          <p>Our team consists of experts in digital automation, analytics, and customer solutions. We ensure a seamless user experience with top-tier technology and innovation.</p>
+        </div>
+      </div>
+      <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
+        <div class="about-card">
+          <i class="fas fa-heart"></i>
+          <h3>Customer-Centric</h3>
+          <p>We prioritize customer satisfaction by offering tailored solutions, transparent workflows, and top-tier support, helping businesses optimize their growth.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Second content block: text + image -->
+  <div class="container my-5 py-4">
+    <div class="row align-items-center g-5">
+      <div class="col-md-7" data-aos="fade-right">
+        <p class="lead">Our platform empowers businesses with cutting-edge tools for digital growth. Whether you need advanced social media solutions, automated services, or secure payment processing, we have you covered.</p>
+        <p class="lead">With years of experience, we understand what it takes to create a streamlined experience for users. Our intuitive dashboard, AI-powered insights, and automation features make managing your business effortless.</p>
+        <ul class="bullet-list mt-4">
+          <li><i class="fas fa-check-circle"></i> Seamless integration with multiple platforms.</li>
+          <li><i class="fas fa-shield-alt"></i> Robust security and data management.</li>
+          <li><i class="fas fa-chart-pie"></i> AI-driven analytics to optimize your business performance.</li>
+        </ul>
+      </div>
+      <div class="col-md-5" data-aos="fade-left">
+        <div class="rounded-image">
+          <img src="{% static 'img/meeting.avif' %}" alt="Business Meeting" class="img-fluid">
+        </div>
+      </div>j
+    </div>
+  </div>
+
+  <!-- Dedication to Excellence -->
+  <section class="container section-bg my-5" data-aos="fade-up">
+    <div class="text-center">
+      <h2 class="title-section">Our Dedication to Excellence</h2>
+      <div class="divider mx-auto"></div>
+      <p class="lead text-muted mx-auto" style="max-width: 900px;">
+        We are committed to delivering exceptional quality and efficiency in every aspect of our services. Through continuous process optimization, regular quality audits, and adherence to the latest industry standards, we ensure that our clients receive the highest level of service.
+      </p>
+      <p class="lead text-muted mx-auto" style="max-width: 900px;">
+        Our team undergoes ongoing training and follows best practices to maintain accuracy, consistency, and security in all operations. With a proactive approach to improvement, we help businesses streamline their workflows with confidence.
+      </p>
+    </div>
+  </section>
+
+  <!-- Secure & Transparent Operations -->
+  <section class="container section-bg my-5" data-aos="fade-up">
+    <div class="text-center">
+      <h2 class="title-section">Secure & Transparent Operations</h2>
+      <div class="divider mx-auto"></div>
+      <p class="lead text-muted mx-auto" style="max-width: 900px;">
+        Security and transparency are at the core of our operations. We implement robust data protection protocols to safeguard sensitive information, ensuring compliance with all relevant regulations.
+      </p>
+      <p class="lead text-muted mx-auto" style="max-width: 900px;">
+        Our clients receive real-time reports, progress updates, and insights into performance metrics, fostering complete trust and control over their operations.
+      </p>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="container my-5 py-4 text-center" data-aos="zoom-in">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <h3 class="fw-bold">Ready to elevate your business?</h3>
+        <p class="lead text-muted">Let’s discuss how our solutions can drive your success.</p>
+        <a href="{% url 'contact' %}" class="btn btn-primary btn-custom btn-lg px-5 py-3 mt-3">
+          <i class="fas fa-calendar-check me-2"></i>Schedule a Consultation
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- AOS initialization -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 800,
+    easing: 'ease-in-out',
+    once: true,
+    mirror: false
+  });
+</script>
+{% endblock %}

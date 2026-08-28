@@ -1,0 +1,576 @@
+{% extends 'templates/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Add AOS & Font Awesome (if not already in base) -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+  /* Global enhancements (reuse from other pages) */
+  .page-banner {
+    position: relative;
+    background-attachment: fixed;
+    border-radius: 0 0 50px 50px;
+    overflow: hidden;
+    padding: 100px 0;
+  }
+  .page-banner .overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+  }
+  .page-banner .container {
+    position: relative;
+    z-index: 2;
+  }
+  .page-banner h1 {
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    font-size: 3.2rem;
+    font-weight: 700;
+  }
+  .breadcrumb-item a, .breadcrumb-item.active {
+    color: #f8f9fa !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  }
+  .title-section {
+    font-size: 2.5rem;
+    font-weight: 600;
+    background: linear-gradient(45deg, #007bff, #0056b3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+  }
+  .marked {
+    background: none;
+    -webkit-text-fill-color: #007bff;
+    font-weight: 700;
+  }
+  .divider {
+    width: 80px;
+    height: 4px;
+    background: #007bff;
+    margin: 20px 0;
+    border-radius: 2px;
+  }
+  .service-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem 1.5rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    height: 100%;
+    border: none;
+  }
+  .service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,123,255,0.1);
+  }
+  .service-icon {
+    font-size: 2.5rem;
+    color: #007bff;
+    margin-bottom: 1rem;
+    transition: transform 0.3s;
+  }
+  .service-card:hover .service-icon {
+    transform: scale(1.2) rotate(5deg);
+  }
+  .service-card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+  }
+  .service-card p {
+    color: #6c757d;
+    margin-bottom: 1rem;
+  }
+  .bullet-list {
+    list-style: none;
+    padding: 0;
+  }
+  .bullet-list li {
+    padding-left: 25px;
+    position: relative;
+    margin-bottom: 8px;
+    color: #555;
+  }
+  .bullet-list li i {
+    position: absolute;
+    left: 0;
+    top: 3px;
+    color: #6f42c1;
+    font-size: 1rem;
+  }
+  .step-item {
+    margin-bottom: 1.5rem;
+  }
+  .step-number {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background: #007bff;
+    color: white;
+    border-radius: 50%;
+    font-weight: 700;
+    margin-right: 1rem;
+  }
+  .btn-custom {
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s;
+  }
+  .btn-custom:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,123,255,0.3);
+  }
+  .bg-soft {
+    background: #f8faff;
+    border-radius: 30px;
+    padding: 3rem 1.5rem;
+    margin: 2rem 0;
+  }
+  .rounded-image {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+  }
+  .rounded-image img {
+    transition: transform 0.5s;
+    width: 100%;
+    height: auto;
+  }
+  .rounded-image:hover img {
+    transform: scale(1.02);
+  }
+  .tech-card {
+    background: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    height: 100%;
+    transition: transform 0.3s;
+    text-align: center;
+  }
+  .tech-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,123,255,0.1);
+  }
+  .tech-card h5 {
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  .contact-form-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  }
+  .contact-info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  .contact-info-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(0,123,255,0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #007bff;
+    margin-right: 1rem;
+  }
+  /* Pricing card additions */
+  .pricing-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem 1.5rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    height: 100%;
+    border: none;
+    text-align: center;
+  }
+  .pricing-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,123,255,0.15);
+  }
+  .price-tag {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #007bff;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+  .price-tag small {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: #6c757d;
+  }
+  .pricing-feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+    text-align: left;
+  }
+  .pricing-feature-list li {
+    padding: 0.4rem 0;
+    border-bottom: 1px dashed #e9ecef;
+  }
+  .pricing-feature-list li i {
+    color: #28a745;
+    margin-right: 0.5rem;
+  }
+  .pricing-note {
+    background: #f8f9fa;
+    border-radius: 50px;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    color: #495057;
+  }
+</style>
+
+<!-- Banner with overlay -->
+<div class="container-fluid px-0">
+  <div class="page-banner" style="background-image: url('{% static 'img/sof1.avif' %}'); background-size: cover; background-position: center;">
+    <div class="overlay"></div>
+    <div class="container text-center">
+      <nav aria-label="breadcrumb">
+        <ul class="breadcrumb justify-content-center py-0 bg-transparent">
+          <li class="breadcrumb-item"><a href="{% url 'index' %}" class="text-white"><i class="fas fa-home me-2"></i>Home</a></li>
+          <li class="breadcrumb-item active text-white" aria-current="page">Software Development</li>
+        </ul>
+      </nav>
+      <h1 class="display-4 fw-bold" data-aos="fade-down">Software Development Services</h1>
+      <p class="lead text-white" data-aos="fade-up" data-aos-delay="100">Innovative, scalable solutions tailored to your business needs</p>
+    </div>
+  </div>
+</div>
+
+<main>
+  <!-- Intro Section -->
+  <div class="page-section">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6 py-3" data-aos="fade-right">
+          <div class="rounded-image">
+            <img src="{% static 'img/soft2.webp' %}" alt="Software Development Team" class="img-fluid">
+          </div>
+        </div>
+        <div class="col-lg-6 py-3" data-aos="fade-left">
+          <h2 class="title-section">We Build <span class="marked">Cutting-Edge</span> Solutions</h2>
+          <div class="divider"></div>
+          <p class="lead text-muted">Our software development expertise delivers innovative, scalable solutions tailored to your business needs. From web applications to enterprise systems, we ensure robust performance and seamless user experiences.</p>
+          <div class="mt-4">
+            <a href="{% url 'services' %}" class="btn btn-primary btn-custom me-3"><i class="fas fa-list me-2"></i>Our Services</a>
+            <a href="{% url 'contact' %}" class="btn btn-outline-primary btn-custom"><i class="fas fa-calculator me-2"></i>Get a Quote</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Services Section -->
+  <section id="services" class="bg-soft my-5" data-aos="fade-up">
+    <div class="container">
+      <h2 class="text-center title-section">Our Software Development Services</h2>
+      <p class="text-center section-subtitle">Comprehensive solutions for every business need</p>
+      <div class="row g-4 mt-4">
+        <!-- Custom Web Development -->
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-globe"></i>
+            </div>
+            <h3>Custom Web Development</h3>
+            <p>We create responsive, high-performance web applications using modern frameworks and technologies tailored to your specific business requirements.</p>
+            <ul class="bullet-list">
+              <li><i class="fas fa-check-circle"></i> Responsive design for all devices</li>
+              <li><i class="fas fa-check-circle"></i> Modern frameworks (React, Angular, Vue)</li>
+              <li><i class="fas fa-check-circle"></i> E-commerce solutions</li>
+            </ul>
+          </div>
+        </div>
+        <!-- Mobile App Development -->
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="150">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-mobile-alt"></i>
+            </div>
+            <h3>Mobile App Development</h3>
+            <p>Native and cross-platform mobile applications that deliver exceptional user experiences and drive engagement for iOS and Android platforms.</p>
+            <ul class="bullet-list">
+              <li><i class="fas fa-check-circle"></i> iOS and Android development</li>
+              <li><i class="fas fa-check-circle"></i> Cross-platform solutions (React Native, Flutter)</li>
+              <li><i class="fas fa-check-circle"></i> App store deployment</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row g-4 mt-2">
+        <!-- Enterprise Solutions -->
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-server"></i>
+            </div>
+            <h3>Enterprise Solutions</h3>
+            <p>Scalable enterprise applications that streamline operations, improve efficiency, and integrate seamlessly with your existing systems.</p>
+            <ul class="bullet-list">
+              <li><i class="fas fa-check-circle"></i> Custom CRM and ERP systems</li>
+              <li><i class="fas fa-check-circle"></i> Database design and management</li>
+              <li><i class="fas fa-check-circle"></i> System integration services</li>
+            </ul>
+          </div>
+        </div>
+        <!-- Cloud Solutions -->
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="250">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-cloud"></i>
+            </div>
+            <h3>Cloud Solutions</h3>
+            <p>Secure, scalable cloud infrastructure and applications that enable your business to grow without technological constraints.</p>
+            <ul class="bullet-list">
+              <li><i class="fas fa-check-circle"></i> AWS, Azure, and Google Cloud</li>
+              <li><i class="fas fa-check-circle"></i> Cloud migration services</li>
+              <li><i class="fas fa-check-circle"></i> Serverless architecture</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Development Process -->
+  <div class="container my-5" data-aos="fade-up">
+    <div class="row align-items-center g-5">
+      <div class="col-md-5" data-aos="fade-right">
+        <div class="rounded-image">
+          <img src="{% static 'img/soft3.webp' %}" alt="Development Process">
+        </div>
+      </div>
+      <div class="col-md-7" data-aos="fade-left">
+        <h2 class="title-section">Our Development <span class="marked">Process</span></h2>
+        <div class="divider"></div>
+        <p class="lead text-muted">We follow an agile development methodology that emphasizes collaboration, flexibility, and continuous improvement. Our process ensures that we deliver high-quality software that meets your evolving business needs.</p>
+        <div class="row mt-4">
+          <div class="col-md-6 step-item">
+            <h4><span class="step-number">1</span> Discovery & Planning</h4>
+            <p class="text-muted">We begin by understanding your business objectives, target audience, and technical requirements to create a comprehensive project plan.</p>
+          </div>
+          <div class="col-md-6 step-item">
+            <h4><span class="step-number">2</span> Design & Prototyping</h4>
+            <p class="text-muted">Our designers create intuitive user interfaces and experiences, followed by prototyping to validate concepts before development.</p>
+          </div>
+          <div class="col-md-6 step-item">
+            <h4><span class="step-number">3</span> Development & Testing</h4>
+            <p class="text-muted">Our developers write clean, maintainable code while our QA team ensures quality through rigorous testing at every stage.</p>
+          </div>
+          <div class="col-md-6 step-item">
+            <h4><span class="step-number">4</span> Deployment & Support</h4>
+            <p class="text-muted">We handle seamless deployment and provide ongoing support and maintenance to ensure your software continues to perform optimally.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Technologies Section -->
+  <section class="bg-soft my-5" data-aos="fade-up">
+    <div class="container">
+      <h2 class="text-center title-section">Technologies We Work With</h2>
+      <p class="text-center section-subtitle">Modern tools for modern solutions</p>
+      <div class="row g-4 mt-4">
+        <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="100">
+          <div class="tech-card">
+            <i class="fab fa-react fa-3x text-primary mb-3"></i>
+            <h5>Frontend</h5>
+            <p class="text-muted">React, Angular, Vue.js, TypeScript, HTML5, CSS3</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="150">
+          <div class="tech-card">
+            <i class="fas fa-server fa-3x text-primary mb-3"></i>
+            <h5>Backend</h5>
+            <p class="text-muted">Node.js, Python, Java, .NET, PHP, Ruby on Rails</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="200">
+          <div class="tech-card">
+            <i class="fas fa-mobile-alt fa-3x text-primary mb-3"></i>
+            <h5>Mobile</h5>
+            <p class="text-muted">iOS (Swift), Android (Kotlin), React Native, Flutter</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="250">
+          <div class="tech-card">
+            <i class="fas fa-database fa-3x text-primary mb-3"></i>
+            <h5>Databases</h5>
+            <p class="text-muted">MySQL, PostgreSQL, MongoDB, Redis, Firebase</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== NEW PRICING PLANS SECTION ========== -->
+  <div class="container my-5" data-aos="fade-up">
+    <h2 class="text-center title-section">Simple, Transparent Pricing</h2>
+    <p class="text-center section-subtitle">Fixed‑price packages to get you started – plus custom enterprise options</p>
+    <div class="row g-4 mt-4 justify-content-center">
+      <!-- Website Plan -->
+      <div class="col-lg-4 col-md-6" data-aos="flip-left" data-aos-delay="100">
+        <div class="pricing-card">
+          <div class="service-icon">
+            <i class="fas fa-laptop-code"></i>
+          </div>
+          <h3>Website Launch</h3>
+          <div class="price-tag">$100 <small>fixed</small></div>
+          <p class="text-muted">Custom website + 2 maintenance sessions</p>
+          <ul class="pricing-feature-list">
+            <li><i class="fas fa-check-circle"></i> Responsive, modern design (up to 5 pages)</li>
+            <li><i class="fas fa-check-circle"></i> Contact form & basic SEO</li>
+            <li><i class="fas fa-check-circle"></i> 2 post‑launch maintenance sessions</li>
+            <li><i class="fas fa-check-circle"></i> 30 days free support</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary btn-custom mt-3">Choose Plan</a>
+        </div>
+      </div>
+      <!-- App Plan -->
+      <div class="col-lg-4 col-md-6" data-aos="flip-left" data-aos-delay="200">
+        <div class="pricing-card">
+          <div class="service-icon">
+            <i class="fas fa-mobile-alt"></i>
+          </div>
+          <h3>App Launch</h3>
+          <div class="price-tag">$100 <small>fixed</small></div>
+          <p class="text-muted">Mobile app + 2 maintenance sessions</p>
+          <ul class="pricing-feature-list">
+            <li><i class="fas fa-check-circle"></i> iOS or Android (or cross‑platform)</li>
+            <li><i class="fas fa-check-circle"></i> Up to 3 core screens / features</li>
+            <li><i class="fas fa-check-circle"></i> 2 post‑launch maintenance sessions</li>
+            <li><i class="fas fa-check-circle"></i> App store submission assistance</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary btn-custom mt-3">Choose Plan</a>
+        </div>
+      </div>
+      <!-- Enterprise / Cloud -->
+      <div class="col-lg-4 col-md-8" data-aos="flip-left" data-aos-delay="300">
+        <div class="pricing-card bg-light border-0">
+          <div class="service-icon">
+            <i class="fas fa-cloud-upload-alt"></i>
+          </div>
+          <h3>Enterprise & Cloud</h3>
+          <div class="price-tag">Custom</div>
+          <p class="text-muted">Tailored for advanced needs</p>
+          <ul class="pricing-feature-list">
+            <li><i class="fas fa-cogs"></i> AWS / Azure / Google Cloud setup</li>
+            <li><i class="fas fa-cogs"></i> CI/CD pipelines & DevOps</li>
+            <li><i class="fas fa-cogs"></i> Scalable microservices / serverless</li>
+            <li><i class="fas fa-cogs"></i> Custom integrations & enterprise features</li>
+          </ul>
+          <div class="pricing-note mt-3">
+            <i class="fas fa-info-circle me-2"></i>Additional charges apply based on scope
+          </div>
+          <a href="#contact" class="btn btn-outline-primary btn-custom mt-3">Request Quote</a>
+        </div>
+      </div>
+    </div>
+    <p class="text-center text-muted mt-4">
+      <i class="fas fa-clock me-2"></i>All plans include free consultation and project roadmap.
+    </p>
+  </div>
+  <!-- ========== END PRICING PLANS ========== -->
+
+  <!-- Contact Section -->
+  <section id="contact" class="container my-5" data-aos="fade-up">
+    <div class="row g-5">
+      <div class="col-lg-7">
+        <h2 class="title-section">Ready to Build Your Next Software Solution?</h2>
+        <div class="divider"></div>
+        <p class="lead text-muted">Our team of experienced developers is ready to transform your ideas into powerful software solutions. Tell us about your project and we'll provide a detailed proposal.</p>
+        <div class="row mt-5">
+          <div class="col-md-6">
+            <div class="contact-info-item">
+              <div class="contact-info-icon"><i class="fas fa-envelope"></i></div>
+              <div>
+                <h5>Email Us</h5>
+                <p class="mb-0">grsservices@gmail.com</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="contact-info-item">
+              <div class="contact-info-icon"><i class="fas fa-phone-alt"></i></div>
+              <div>
+                <h5>Call Us</h5>
+                <p class="mb-0">+1 (609) 928-6025</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 mt-4">
+            <div class="contact-info-item">
+              <div class="contact-info-icon"><i class="fas fa-cogs"></i></div>
+              <div>
+                <h5>Development Process</h5>
+                <p class="mb-0">We follow agile methodology with transparent communication and regular updates throughout the project lifecycle.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="contact-form-card">
+          <h4 class="mb-4"><i class="fas fa-paper-plane text-primary me-2"></i>Get a Free Quote</h4>
+          <form method="post" action="">
+            {% csrf_token %}
+            <div class="mb-3">
+              <input required name="name" class="form-control form-control-lg rounded-pill" placeholder="Your Name">
+            </div>
+            <div class="mb-3">
+              <input required name="email" type="email" class="form-control form-control-lg rounded-pill" placeholder="Your Email">
+            </div>
+            <div class="mb-3">
+              <input name="company" class="form-control form-control-lg rounded-pill" placeholder="Company (optional)">
+            </div>
+            <div class="mb-3">
+              <select class="form-control form-control-lg rounded-pill" name="service">
+                <option value="">Select a Service</option>
+                <option value="web">Web Development</option>
+                <option value="mobile">Mobile App Development</option>
+                <option value="enterprise">Enterprise Solutions</option>
+                <option value="cloud">Cloud Solutions</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <textarea required name="message" rows="4" class="form-control rounded-4" placeholder="Tell us about your project"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-custom w-100">Send Request</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- AOS initialization -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 800,
+    easing: 'ease-in-out',
+    once: true,
+    mirror: false
+  });
+</script>
+{% endblock %}

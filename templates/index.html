@@ -1,0 +1,546 @@
+{% extends 'templates/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Add AOS & Font Awesome (if not already in base) -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+  /* Global enhancements */
+  .page-banner.home-banner {
+    position: relative;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+    overflow: hidden;
+    border-radius: 0 0 50px 50px;
+  }
+  .home-banner h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    background: linear-gradient(45deg, #007bff, #0056b3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1.2;
+  }
+  .btn-split {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 50px;
+    padding: 10px 25px;
+  }
+  .btn-split .fab {
+    background: white;
+    color: #007bff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+    transition: all 0.3s;
+  }
+  .btn-split:hover .fab {
+    transform: translateX(5px);
+  }
+  .feature-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem 1.5rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    height: 100%;
+  }
+  .feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,123,255,0.1);
+  }
+  .feature-icon {
+    font-size: 2.5rem;
+    color: #007bff;
+    margin-right: 1rem;
+    transition: transform 0.3s;
+  }
+  .feature-card:hover .feature-icon {
+    transform: scale(1.2) rotate(5deg);
+  }
+  .service-card-home {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .service-card-home:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,123,255,0.15);
+  }
+  .service-card-home img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .service-card-home:hover img {
+    transform: scale(1.05);
+  }
+  .service-card-home .content {
+    padding: 1.5rem;
+  }
+  .service-card-home h5 {
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: #2c3e50;
+  }
+  .service-card-home h5 i {
+    color: #007bff;
+    margin-right: 8px;
+  }
+  .service-card-home p {
+    color: #6c757d;
+    margin-bottom: 0;
+  }
+  .title-section {
+    font-size: 2.5rem;
+    font-weight: 600;
+    background: linear-gradient(45deg, #007bff, #0056b3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+  }
+  .marked {
+    background: none;
+    -webkit-text-fill-color: #007bff;
+    font-weight: 700;
+  }
+  .divider {
+    width: 80px;
+    height: 4px;
+    background: #007bff;
+    margin: 20px 0;
+    border-radius: 2px;
+  }
+  .contact-list {
+    list-style: none;
+    padding: 0;
+  }
+  .contact-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+  }
+  .contact-list .icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(0,123,255,0.1);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #007bff;
+    margin-right: 1rem;
+  }
+  .client-section .item {
+    padding: 2rem;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+  .client-section .item:hover {
+    opacity: 1;
+  }
+  .client-section img {
+    filter: grayscale(1);
+    transition: filter 0.3s;
+  }
+  .client-section .item:hover img {
+    filter: grayscale(0);
+  }
+  .rounded-image {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+  }
+  .rounded-image img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.5s;
+  }
+  .rounded-image:hover img {
+    transform: scale(1.02);
+  }
+  .bg-soft {
+    background: #f8faff;
+    border-radius: 30px;
+    padding: 3rem 2rem;
+  }
+  .btn-custom {
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s;
+  }
+  .btn-custom:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,123,255,0.3);
+  }
+  .why-choose-icon {
+    font-size: 2rem;
+    color: #007bff;
+    margin-right: 1rem;
+    transition: transform 0.3s;
+  }
+  .why-choose-item:hover .why-choose-icon {
+    transform: scale(1.2) rotate(5deg);
+  }
+</style>
+
+<!-- Hero Banner -->
+<header>
+  <div class="page-banner home-banner">
+    <div class="container h-100">
+      <div class="row align-items-center h-100">
+        <div class="col-lg-6 py-3" data-aos="fade-right">
+          <h1 class="mb-4">Empowering Businesses with Innovative Solutions</h1>
+          <p class="lead mb-5">
+            Delivering world-class services to help businesses thrive globally.
+            We empower organizations with innovative solutions, cutting-edge technology,
+            and strategic expertise to enhance efficiency, drive growth, and stay ahead in a competitive market.
+          </p>
+          <a href="#" class="btn btn-outline-primary btn-custom">Learn More</a>
+          <a href="{% url 'services' %}" class="btn btn-primary btn-custom btn-split ml-2">
+            Our Services <span class="fab"><i class="fas fa-arrow-right"></i></span>
+          </a>
+        </div>
+        <div class="col-lg-6 py-3" data-aos="fade-left">
+          <div class="rounded-image">
+            <img src="{% static 'img/bgimage1.png' %}" alt="Global Business Solutions">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- Features Section -->
+  <div class="page-section features">
+    <div class="container">
+      <div class="row justify-content-center g-4">
+        <div class="col-md-6 col-lg-4 py-3" data-aos="fade-up" data-aos-delay="100">
+          <div class="feature-card d-flex">
+            <div class="feature-icon">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <div>
+              <h5>Expert Business Consultation</h5>
+              <p class="text-muted">Helping businesses optimize operations, improve efficiency, and achieve sustainable growth with strategic insights.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 py-3" data-aos="fade-up" data-aos-delay="200">
+          <div class="feature-card d-flex">
+            <div class="feature-icon">
+              <i class="fas fa-microchip"></i>
+            </div>
+            <div>
+              <h5>Innovative Digital Solutions</h5>
+              <p class="text-muted">Providing cutting-edge technology and digital transformation strategies to enhance business productivity and success.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 py-3" data-aos="fade-up" data-aos-delay="300">
+          <div class="feature-card d-flex">
+            <div class="feature-icon">
+              <i class="fas fa-globe"></i>
+            </div>
+            <div>
+              <h5>Global Business Support</h5>
+              <p class="text-muted">Offering customized solutions to help organizations expand their reach, streamline processes, and stay ahead in the global market.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dynamic Team Section -->
+  <div class="page-section">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 py-3" data-aos="zoom-in">
+          <div class="rounded-image">
+            <img src="{% static 'img/bg_image_2.png' %}" alt="Our Team">
+          </div>
+        </div>
+        <div class="col-lg-6 py-3" data-aos="fade-left">
+          <h2 class="title-section">We're <span class="marked">Dynamic</span> Team of Creatives People</h2>
+          <div class="divider"></div>
+          <p class="lead text-muted">We provide marketing services to startups & small business for their digital media, design & dev lead generation & communication.</p>
+          <div class="my-4">
+            <img src="{% static 'img/testi_image.png' %}" alt="Testimonial" class="img-fluid rounded shadow-sm">
+          </div>
+          <a href="{% url 'about' %}" class="btn btn-primary btn-custom">More Details</a>
+          <a href="#" class="btn btn-outline-primary btn-custom ml-2">Success Stories</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Our Services Section (Enhanced) -->
+  <div class="page-section services bg-soft">
+    <div class="container">
+      <div class="text-center mb-5" data-aos="fade-up">
+        <h2 class="title-section">Our Services</h2>
+        <div class="divider mx-auto"></div>
+        <p class="lead text-muted">Comprehensive solutions tailored to your business needs</p>
+      </div>
+      <div class="row g-4">
+        <!-- Call Center -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+          <a href="{% url 'callcenter' %}" class="service-card-home">
+            <img src="{% static 'img/grscall.png' %}" alt="Call Center">
+            <div class="content">
+              <h5><i class="fas fa-headset"></i> Call Center Solutions</h5>
+              <p>Providing professional customer support and telemarketing services to enhance business communication and client satisfaction.</p>
+            </div>
+          </a>
+        </div>
+        <!-- Medical Billing -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="150">
+          <a href="{% url 'medicalbilling' %}" class="service-card-home">
+            <img src="{% static 'img/medicap.png' %}" alt="Medical Billing">
+            <div class="content">
+              <h5><i class="fas fa-file-invoice-dollar"></i> Medical Billing Services</h5>
+              <p>Streamlining healthcare billing and revenue cycle management with accuracy and compliance to maximize profitability.</p>
+            </div>
+          </a>
+        </div>
+        <!-- Software Development -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+          <a href="{% url 'softwaredevelopment' %}" class="service-card-home">
+            <img src="{% static 'img/grssoft.png' %}" alt="Software Development">
+            <div class="content">
+              <h5><i class="fas fa-code"></i> Software Development</h5>
+              <p>Delivering tailored software solutions, web applications, and automation tools to drive business efficiency and digital transformation.</p>
+            </div>
+          </a>
+        </div>
+        <!-- Content Writing -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="250">
+          <a href="{% url 'contentwriting' %}" class="service-card-home">
+            <img src="{% static 'img/bookkeep.png' %}" alt="Content Writing">
+            <div class="content">
+              <h5><i class="fas fa-pen-fancy"></i> Book Keeping</h5>
+              <p>We specialize in delivering comprehensive bookkeeping services that empower clients to maintain accurate financial records and ensure compliance.</p>
+            </div>
+          </a>
+        </div>
+     
+       <!-- GIS & Geospatial Solutions -->
+<div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+  <a href="{% url 'gis' %}" class="service-card-home">
+    <img src="{% static 'img/gissol.png' %}" alt="GIS & Geospatial Solutions">
+    <div class="content">
+      <h5><i class="fas fa-map-marked-alt"></i> GIS & Geospatial Solutions</h5>
+      <p>Powered by Globewise Engineering Solutions — delivering hazard mapping, spatial risk analysis, and Esri-based enterprise workflows for transportation, public safety, and land management.</p>
+    </div>
+  </a>
+</div>
+        <!-- IT Consultancy -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="350">
+          <a href="{% url 'itconsultancy' %}" class="service-card-home">
+            <img src="{% static 'img/itcon.png' %}" alt="IT Consultancy">
+            <div class="content">
+              <h5><i class="fas fa-network-wired"></i> IT Consultancy</h5>
+              <p>Providing expert IT consulting services to optimize technology infrastructure, enhance security, and drive digital transformation.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Why Choose Us (first version) -->
+  <div class="container py-5">
+    <div class="text-center mb-5" data-aos="fade-up">
+      <h2 class="title-section">Why Choose Us?</h2>
+      <div class="divider mx-auto"></div>
+      <p class="lead text-muted">We provide top-notch services tailored to your business needs, ensuring quality and satisfaction.</p>
+    </div>
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6" data-aos="fade-right">
+        <div class="rounded-image">
+          <img src="{% static 'img/choose.webp' %}" alt="Business Meeting">
+        </div>
+      </div>
+      <div class="col-lg-6" data-aos="fade-left">
+        <div class="why-choose-item d-flex mb-4">
+          <div class="why-choose-icon">
+            <i class="fas fa-briefcase"></i>
+          </div>
+          <div>
+            <h5 class="fw-bold text-primary">Professional Expertise</h5>
+            <p class="text-muted">Our team consists of industry experts with years of experience in their respective fields.</p>
+          </div>
+        </div>
+        <div class="why-choose-item d-flex mb-4">
+          <div class="why-choose-icon">
+            <i class="fas fa-chart-bar"></i>
+          </div>
+          <div>
+            <h5 class="fw-bold text-primary">Data-Driven Strategies</h5>
+            <p class="text-muted">We use analytics and insights to ensure optimal results for our clients.</p>
+          </div>
+        </div>
+        <div class="why-choose-item d-flex">
+          <div class="why-choose-icon">
+            <i class="fas fa-lightbulb"></i>
+          </div>
+          <div>
+            <h5 class="fw-bold text-primary">Innovative Solutions</h5>
+            <p class="text-muted">We deliver creative and customized solutions that set your business apart.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ready to Serve Section -->
+  <div class="page-section bg-soft">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 py-3" data-aos="fade-right">
+          <h2 class="title-section">We're <span class="marked">ready to</span> Serve you with the Best</h2>
+          <div class="divider"></div>
+          <p class="lead text-muted mb-5">
+            We provide marketing services to startups & small businesses looking for a reliable partner for their digital media, design, development, lead generation, and communication strategies.
+          </p>
+          <a href="#" class="btn btn-primary btn-custom">More Details</a>
+        </div>
+        <div class="col-lg-6 py-3" data-aos="zoom-in">
+          <div class="rounded-image">
+            <img src="{% static 'img/chos2.avif' %}" alt="Meeting Image">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Priority Section (Your Comfort is Our Priority) -->
+  <div class="page-section">
+    <div class="container">
+      <div class="text-center" data-aos="fade-up">
+        <div class="subhead text-primary">Why Choose Us</div>
+        <h2 class="title-section">Your <span class="marked">Comfort</span> is Our Priority</h2>
+        <div class="divider mx-auto"></div>
+      </div>
+      <div class="row mt-5 text-center g-4">
+        <div class="col-lg-4 py-3" data-aos="fade-up" data-aos-delay="100">
+          <div class="feature-card p-4">
+            <div class="display-3 text-primary mb-3"><i class="fas fa-rocket"></i></div>
+            <h5>High Performance</h5>
+            <p class="text-muted">Our services are optimized for maximum efficiency, ensuring you get the best results in the shortest time possible.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 py-3" data-aos="fade-up" data-aos-delay="200">
+          <div class="feature-card p-4">
+            <div class="display-3 text-primary mb-3"><i class="fas fa-tag"></i></div>
+            <h5>Friendly Prices</h5>
+            <p class="text-muted">We offer budget-friendly solutions without compromising on quality, making professional services accessible to all.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 py-3" data-aos="fade-up" data-aos-delay="300">
+          <div class="feature-card p-4">
+            <div class="display-3 text-primary mb-3"><i class="fas fa-clock"></i></div>
+            <h5>No Time-Consuming</h5>
+            <p class="text-muted">Our streamlined processes eliminate unnecessary delays, helping you save valuable time and focus on what truly matters.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Section -->
+  <div class="page-section bg-soft">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 py-3" data-aos="fade-up">
+          <h2 class="title-section">Get in Touch</h2>
+          <div class="divider"></div>
+          <p class="lead text-muted">Our highly trained team offers 24/7 support, ensuring every interaction is handled with expertise, efficiency, and compliance, so your operations run smoothly without interruption.</p>
+          <ul class="contact-list mt-4">
+            <li>
+              <span class="icon"><i class="fas fa-map-marker-alt"></i></span>
+              <span>699 Atlantic City Blvd, Bayville, NJ, USA</span>
+            </li>
+            <li>
+              <span class="icon"><i class="fas fa-envelope"></i></span>
+              <span><a href="mailto:info@grsservices.co" class="text-decoration-none">www.grsservices.co</a></span>
+            </li>
+            <li>
+              <span class="icon"><i class="fas fa-phone-alt"></i></span>
+              <span><a href="tel:+16099286025" class="text-decoration-none">+1 (609) 928-6025</a></span>
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-6 py-3" data-aos="fade-up" data-aos-delay="100">
+          <div class="subhead text-primary">Contact Us</div>
+          <h2 class="title-section">Drop Us a Line</h2>
+          <div class="divider"></div>
+          <form action="" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+              <input type="text" name="full_name" class="form-control form-control-lg rounded-pill" placeholder="Full name">
+            </div>
+            <div class="mb-3">
+              <input type="email" name="email" class="form-control form-control-lg rounded-pill" placeholder="Email">
+            </div>
+            <div class="mb-3">
+              <textarea rows="5" name="message" class="form-control form-control-lg rounded-4" placeholder="Enter message"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-custom px-5">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Clients Section -->
+  <div class="page-section client-section">
+    <div class="container-fluid">
+      <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 justify-content-center align-items-center g-4">
+        <div class="item" data-aos="zoom-in" data-aos-delay="100">
+          <img src="{% static 'img/clients/airbnb.png' %}" alt="Airbnb" class="img-fluid">
+        </div>
+        <div class="item" data-aos="zoom-in" data-aos-delay="150">
+          <img src="{% static 'img/clients/google.png' %}" alt="Google" class="img-fluid">
+        </div>
+        <div class="item" data-aos="zoom-in" data-aos-delay="200">
+          <img src="{% static 'img/clients/stripe.png' %}" alt="Stripe" class="img-fluid">
+        </div>
+        <div class="item" data-aos="zoom-in" data-aos-delay="250">
+          <img src="{% static 'img/clients/paypal.png' %}" alt="PayPal" class="img-fluid">
+        </div>
+        <div class="item" data-aos="zoom-in" data-aos-delay="300">
+          <img src="{% static 'img/clients/mailchimp.png' %}" alt="Mailchimp" class="img-fluid">
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- AOS initialization -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 800,
+    easing: 'ease-in-out',
+    once: true,
+    mirror: false
+  });
+</script>
+{% endblock %}

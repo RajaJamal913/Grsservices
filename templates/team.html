@@ -1,0 +1,601 @@
+{% extends 'templates/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Add AOS & Font Awesome (if not already in base) -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+  /* Custom enhancements */
+  .page-banner {
+    position: relative;
+    background-attachment: fixed;
+    border-radius: 0 0 50px 50px;
+    overflow: hidden;
+    padding: 100px 0;
+  }
+  .page-banner .overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+  }
+  .page-banner .container {
+    position: relative;
+    z-index: 2;
+  }
+  .page-banner h1 {
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    font-size: 3.5rem;
+    font-weight: 700;
+  }
+  .page-banner .lead {
+    color: #f8f9fa;
+    font-size: 1.25rem;
+  }
+  .breadcrumb-item a, .breadcrumb-item.active {
+    color: #f8f9fa !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  }
+  .team-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem 1.5rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    height: 100%;
+    border: none;
+    text-align: center;
+  }
+  .team-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,123,255,0.1);
+  }
+  .team-img {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 50%;
+    border: 4px solid #007bff;
+    padding: 4px;
+    background: white;
+    margin-bottom: 1rem;
+    transition: transform 0.3s;
+  }
+  .team-card:hover .team-img {
+    transform: scale(1.05);
+  }
+  .team-card h5 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: #2c3e50;
+  }
+  .team-card .text-muted {
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+  }
+  .team-card p.small {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-bottom: 1rem;
+  }
+  .skill-badge {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 50px;
+    background: #f0f4ff;
+    color: #007bff;
+    display: inline-block;
+    margin: 0.15rem;
+    font-weight: 500;
+  }
+  .skill-badge i {
+    margin-right: 4px;
+    font-size: 0.7rem;
+  }
+  .btn-view {
+    background: transparent;
+    border: 2px solid #007bff;
+    color: #007bff;
+    border-radius: 50px;
+    padding: 0.4rem 1.2rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.3s;
+    margin-top: 1rem;
+  }
+  .btn-view:hover {
+    background: #007bff;
+    color: white;
+  }
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    background: linear-gradient(45deg, #007bff, #0056b3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+  }
+  .section-subtitle {
+    color: #6c757d;
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto 2rem;
+  }
+  .bg-soft {
+    background: #f8faff;
+    border-radius: 30px;
+    padding: 3rem 1.5rem;
+    margin: 2rem 0;
+  }
+  .cta-box {
+    background: linear-gradient(135deg, #f8faff, #eef2f9);
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  }
+  .cta-box h4 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #2c3e50;
+  }
+</style>
+
+<!-- Page Banner with overlay -->
+<div class="container-fluid px-0">
+  <div class="page-banner" style="background-image: url('{% static 'img/img_bg_1.jpg' %}'); background-size: cover; background-position: center;">
+    <div class="overlay"></div>
+    <div class="container text-center">
+      <nav aria-label="breadcrumb">
+        <ul class="breadcrumb justify-content-center py-0 bg-transparent">
+          <li class="breadcrumb-item"><a href="{% url 'index' %}" class="text-white"><i class="fas fa-home me-2"></i>Home</a></li>
+          <li class="breadcrumb-item active text-white" aria-current="page">Team</li>
+        </ul>
+      </nav>
+      <h1 class="display-4 fw-bold" data-aos="fade-down">Meet Our Team</h1>
+      <p class="lead" data-aos="fade-up" data-aos-delay="100">A dedicated group of professionals combining technology, support and domain expertise to deliver reliable, human-centered solutions.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Intro text -->
+<div class="container mt-5" data-aos="fade-up">
+  <p class="text-center section-subtitle">Our people are our strength. We strive for technical excellence while keeping customer care at the heart of everything we do. Below you can find short bios, core skills and direct ways to reach the right person for a given need.</p>
+</div>
+
+<!-- Call Center Team Section -->
+<div class="container mt-5" data-aos="fade-up">
+  <h2 class="text-center section-title">Call Center Team</h2>
+  <p class="text-center section-subtitle">Friendly, trained agents who handle customer queries, escalation and account management.</p>
+  <div class="row g-4 mt-4">
+    <!-- Shahmeer -->
+    <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+      <div class="team-card">
+        <img src="{% static 'img/shahmeerz.png' %}" alt="Muhammad Shahmeer Raja" class="team-img">
+        <h5>Muhammad Shahmeer Raja</h5>
+        <p class="text-muted">Customer Support Manager</p>
+        <p class="small">Leads the support team, focuses on SLA adherence and quality coaching to ensure fast, consistent responses.</p>
+        <div class="mb-3">
+          <span class="skill-badge"><i class="fas fa-check-circle"></i> Customer Success</span>
+          <span class="skill-badge"><i class="fas fa-clock"></i> SLA Management</span>
+          <span class="skill-badge"><i class="fas fa-chalkboard-teacher"></i> Training</span>
+        </div>
+        <button class="btn-view" data-bs-toggle="modal" data-bs-target="#modal-shahmeer"><i class="fas fa-user me-2"></i>View Profile</button>
+      </div>
+    </div>
+    <!-- Ahmed -->
+    <div class="col-md-4" data-aos="fade-up" data-aos-delay="150">
+      <div class="team-card">
+        <img src="{% static 'img/ahmed.jpg' %}" alt="Ahmed Qureshi" class="team-img">
+        <h5>Ahmed Qureshi</h5>
+        <p class="text-muted">Senior Support Representative</p>
+        <p class="small">Specializes in account troubleshooting, billing queries and coaching junior agents on complex cases.</p>
+        <div class="mb-3">
+          <span class="skill-badge"><i class="fas fa-wrench"></i> Troubleshooting</span>
+          <span class="skill-badge"><i class="fas fa-dollar-sign"></i> Billing</span>
+          <span class="skill-badge"><i class="fas fa-users"></i> Mentorship</span>
+        </div>
+        <button class="btn-view" data-bs-toggle="modal" data-bs-target="#modal-ahmed"><i class="fas fa-user me-2"></i>View Profile</button>
+      </div>
+    </div>
+    <!-- Umer -->
+    <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+      <div class="team-card">
+        <img src="{% static 'img/sheikhz.png' %}" alt="Umer Sheikh" class="team-img">
+        <h5>Umer Sheikh</h5>
+        <p class="text-muted">Technical Support Specialist</p>
+        <p class="small">Handles technical escalations, product configuration and integration troubleshooting.</p>
+        <div class="mb-3">
+          <span class="skill-badge"><i class="fas fa-plug"></i> Integrations</span>
+          <span class="skill-badge"><i class="fas fa-search"></i> Diagnostics</span>
+          <span class="skill-badge"><i class="fas fa-code"></i> Scripting</span>
+        </div>
+        <button class="btn-view" data-bs-toggle="modal" data-bs-target="#modal-umer"><i class="fas fa-user me-2"></i>View Profile</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Software Team Section -->
+<div class="container mt-5 " data-aos="fade-up">
+  <h2 class="text-center section-title">Software Team</h2>
+  <p class="text-center section-subtitle">Engineers and cloud experts building robust, maintainable systems.</p>
+  <div class="row g-4 mt-4">
+    <!-- Hamza -->
+    <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+      <div class="team-card">
+        <img src="{% static 'img/tarazi.png' %}" alt="Hamza Tarazi" class="team-img">
+        <h5>Hamza Tarazi</h5>
+        <p class="text-muted">Full Stack Developer</p>
+        <p class="small">Works across frontend and backend to deliver product features with emphasis on usability and performance.</p>
+        <div class="mb-3">
+          <span class="skill-badge"><i class="fab fa-react"></i> React/Blazor</span>
+          <span class="skill-badge"><i class="fab fa-python"></i> Django/.NET</span>
+          <span class="skill-badge"><i class="fas fa-vial"></i> Testing</span>
+        </div>
+        <button class="btn-view" data-bs-toggle="modal" data-bs-target="#modal-hamza"><i class="fas fa-user me-2"></i>View Profile</button>
+      </div>
+    </div>
+    <!-- Arsalan -->
+    <div class="col-md-4" data-aos="fade-up" data-aos-delay="150">
+      <div class="team-card">
+        <img src="{% static 'img/arsalan.jfif' %}" alt="Arsalan Ejaz" class="team-img">
+        <h5>Arsalan Ejaz</h5>
+        <p class="text-muted">AWS Expert</p>
+        <p class="small">Designs and operates our cloud infrastructure with a focus on reliability and cost-efficiency.</p>
+        <div class="mb-3">
+          <span class="skill-badge"><i class="fab fa-aws"></i> AWS</span>
+          <span class="skill-badge"><i class="fas fa-tools"></i> DevOps</span>
+          <span class="skill-badge"><i class="fas fa-chart-line"></i> Observability</span>
+        </div>
+        <button class="btn-view" data-bs-toggle="modal" data-bs-target="#modal-arsalan"><i class="fas fa-user me-2"></i>View Profile</button>
+      </div>
+    </div>
+    <!-- Jamal -->
+    <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+      <div class="team-card">
+        <img src="{% static 'img/jamalraja.png' %}" alt="Muhammad Jamal Raja" class="team-img">
+        <h5>Muhammad Jamal Raja</h5>
+        <p class="text-muted">Full Stack Developer</p>
+        <p class="small">Focused on pixel-perfect UI, responsive design and improving user journeys across the product.</p>
+        <div class="mb-3">
+          <span class="skill-badge"><i class="fab fa-html5"></i> Django/Python</span>
+          <span class="skill-badge"><i class="fab fa-bootstrap"></i> Rest Apis</span>
+          <span class="skill-badge"><i class="fas fa-universal-access"></i> DevOps</span>
+        </div>
+        <!-- replace with anchor — navigates to the profile page -->
+<a href="{% url 'muhammadjamalraja' %}"
+   class="btn-view"
+   role="button"
+   aria-label="View Muhammad Jamal Raja profile">
+  <i class="fas fa-user me-2"></i>View Profile
+</a>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Business Development Section -->
+<div class="container mt-5" data-aos="fade-up">
+  <h2 class="text-center section-title">Business Development</h2>
+  <p class="text-center section-subtitle">Driving growth, partnerships and strategic initiatives.</p>
+  <div class="row g-4 mt-4 justify-content-center">
+    <!-- Irfan Haider (existing) -->
+    <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+      <div class="team-card">
+        <img src="{% static 'img/irfan.png' %}" alt="Muhammad Irfan" class="team-img">
+        <h5>Irfan Haider</h5>
+        <p class="text-muted">Business Development Manager</p>
+        <p class="small">Leads business development efforts, forging new partnerships and identifying market opportunities.</p>
+        <div class="mb-3">
+          <span class="skill-badge"><i class="fas fa-handshake"></i> Partnerships</span>
+          <span class="skill-badge"><i class="fas fa-chart-line"></i> Market Strategy</span>
+          <span class="skill-badge"><i class="fas fa-bullhorn"></i> Sales</span>
+        </div>
+        <button class="btn-view" data-bs-toggle="modal" data-bs-target="#modal-irfan"><i class="fas fa-user me-2"></i>View Profile</button>
+      </div>
+    </div>
+
+    <!-- Izza Sajid (new, with LinkedIn link) -->
+    <div class="col-md-4" data-aos="fade-up" data-aos-delay="150">
+      <div class="team-card">
+        <img src="{% static 'img/izza.png' %}" alt="Izza Sajid" class="team-img">
+        <h5>Izza Sajid</h5>
+        <p class="text-muted">International Business Developer</p>
+        <p class="small">Focuses on global market expansion, cross‑border partnerships and cultural alignment to drive international growth.</p>
+        <div class="mb-3">
+          <span class="skill-badge"><i class="fas fa-globe"></i> Global Markets</span>
+          <span class="skill-badge"><i class="fas fa-handshake"></i> Partnerships</span>
+          <span class="skill-badge"><i class="fas fa-language"></i> Cross‑cultural Comms</span>
+        </div>
+        <!-- LinkedIn profile link instead of modal -->
+        <a href="https://www.linkedin.com/in/izza-sajid-4701251b9/" class="btn-view" target="_blank" rel="noopener noreferrer">
+          <i class="fas fa-user me-2"></i>View Profile
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Medical & Research Advisors Section -->
+<div class="container mt-5 mb-5" data-aos="fade-up">
+  <h2 class="text-center section-title">Medical & Research Advisors</h2>
+  <p class="text-center section-subtitle">Advisors who guide our medical product decisions, reports and clinical-quality standards.</p>
+  <div class="row g-4 mt-4">
+    <!-- Dr Shehzad -->
+    <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+      <div class="team-card">
+        <img src="{% static 'img/shzd.png' %}" alt="Dr. Shehzad Malik" class="team-img">
+        <h5>Dr. Shehzad Malik</h5>
+        <p class="text-muted">Chief Medical Officer</p>
+        <p class="small">Oversees clinical review, report validation and ensures our offerings meet medical compliance and quality standards.</p>
+        <div class="mb-3">
+          <span class="skill-badge"><i class="fas fa-stethoscope"></i> Clinical Governance</span>
+          <span class="skill-badge"><i class="fas fa-file-medical"></i> Medical Review</span>
+        </div>
+        <button class="btn-view" data-bs-toggle="modal" data-bs-target="#modal-shehzad"><i class="fas fa-user me-2"></i>View Profile</button>
+      </div>
+    </div>
+    <!-- Hashim Amla (formerly Michael) -->
+    <div class="col-md-4" data-aos="fade-up" data-aos-delay="150">
+      <div class="team-card">
+        <img src="{% static 'img/hashim.jfif' %}" alt="Hashim Amla" class="team-img">
+        <h5>Hashim Ali</h5>
+        <p class="text-muted">Senior Coder</p>
+        <p class="small">Experienced in data pipelines and automation used in medical reporting workflows.</p>
+        <div class="mb-3">
+          <span class="skill-badge"><i class="fas fa-database"></i> Data Engineering</span>
+          <span class="skill-badge"><i class="fas fa-robot"></i> Automation</span>
+        </div>
+        <button class="btn-view" data-bs-toggle="modal" data-bs-target="#modal-hashim"><i class="fas fa-user me-2"></i>View Profile</button>
+      </div>
+    </div>
+    <!-- Dr. Khurram Raja (formerly Emily) -->
+    <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+      <div class="team-card">
+        <img src="{% static 'img/khrm.png' %}" alt="Dr. Khurram Raja" class="team-img">
+        <h5>Dr. Khurram Raja</h5>
+        <p class="text-muted">Report Analyst</p>
+        <p class="small">Analyzes case data and crafts clear, actionable reports for clinicians and stakeholders.</p>
+        <div class="mb-3">
+          <span class="skill-badge"><i class="fas fa-chart-pie"></i> Analysis</span>
+          <span class="skill-badge"><i class="fas fa-file-alt"></i> Reporting</span>
+        </div>
+        <button class="btn-view" data-bs-toggle="modal" data-bs-target="#modal-khurram"><i class="fas fa-user me-2"></i>View Profile</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Business Development Section -->
+
+
+<!-- Contact CTA -->
+<div class="container mb-5" data-aos="fade-up">
+  <div class="cta-box text-center">
+    <h4 class="mb-3">Need support or want to work with our team?</h4>
+    <p class="text-muted mb-4">Visit our contact page and we'll route your request to the right specialist.</p>
+    <a href="{% url 'contact' %}" class="btn btn-primary btn-lg rounded-pill px-5 py-3"><i class="fas fa-envelope me-2"></i>Contact Us</a>
+  </div>
+</div>
+
+<!-- Modals (profiles) - All modals defined as before, but ensure they have correct IDs and content -->
+<!-- Shahmeer Modal -->
+<div class="modal fade" id="modal-shahmeer" tabindex="-1" aria-labelledby="modalShahmeerLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalShahmeerLabel">Muhammad Shahmeer Raja — Customer Support Manager</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>About:</strong> Shahmeer manages the support operations, focusing on reducing response times and improving customer satisfaction through coaching and process improvements.</p>
+        <p><strong>Experience:</strong> 5+ years in customer operations, escalation handling and team leadership.</p>
+        <p><strong>Core strengths:</strong> SLA design, quality assurance, cross-team coordination.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Ahmed Modal -->
+<div class="modal fade" id="modal-ahmed" tabindex="-1" aria-labelledby="modalAhmedLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalAhmedLabel">Ahmed Qureshi — Senior Support Representative</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Ahmed handles complex customer issues and mentors junior agents to improve first-contact resolution rates.</p>
+        <p><strong>Core skills:</strong> billing analysis, escalation handling, process documentation.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Umer Modal -->
+<div class="modal fade" id="modal-umer" tabindex="-1" aria-labelledby="modalUmerLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalUmerLabel">Umer Sheikh — Technical Support Specialist</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Umer specialises in integration support, resolving product issues and guiding customers through technical setups.</p>
+        <p><strong>Core skills:</strong> API troubleshooting, diagnostics and configuration.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Hamza Modal -->
+<div class="modal fade" id="modal-hamza" tabindex="-1" aria-labelledby="modalHamzaLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalHamzaLabel">Hamza Tarazi — Full Stack Developer</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Hamza builds product features end-to-end and focuses on maintainable, testable code and good UX patterns.</p>
+        <p><strong>Core skills:</strong> frontend engineering, backend APIs, CI/CD.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Arsalan Modal -->
+<div class="modal fade" id="modal-arsalan" tabindex="-1" aria-labelledby="modalArsalanLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalArsalanLabel">Arsalan Ejaz — AWS Expert</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Arsalan oversees cloud architecture, cost optimisation and operational reliability of our systems.</p>
+        <p><strong>Core skills:</strong> cloud architecture, automation, monitoring.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Jamal Modal -->
+<div class="modal fade" id="modal-jamal" tabindex="-1" aria-labelledby="modalJamalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalJamalLabel">Muhammad Jamal Raja — Full Stack Developer</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Jamal focuses on front-end details, responsive layouts and improving accessibility across the product.</p>
+        <p><strong>Core skills:</strong> responsive design, cross-browser testing, accessibility.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Dr Shehzad Modal -->
+<div class="modal fade" id="modal-shehzad" tabindex="-1" aria-labelledby="modalShehzadLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalShehzadLabel">Dr. Shehzad Malik — Chief Medical Officer</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Dr. Shehzad provides clinical oversight and checks that our reports and clinical content meet professional standards.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Hashim Modal (new) -->
+<div class="modal fade" id="modal-hashim" tabindex="-1" aria-labelledby="modalHashimLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalHashimLabel">Hashim Ali — Senior Coder</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Hashim builds and optimises data workflows used in analytics and reporting pipelines.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Dr. Khurram Modal (new) -->
+<div class="modal fade" id="modal-khurram" tabindex="-1" aria-labelledby="modalKhurramLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalKhurramLabel">Dr. Khurram Raja — Report Analyst</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Khurram analyses case data and prepares clinical-grade reports for our products and partners.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Irfan Modal -->
+<div class="modal fade" id="modal-irfan" tabindex="-1" aria-labelledby="modalIrfanLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalIrfanLabel">Muhammad Irfan — Business Development Manager</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Muhammad Irfan leads our business development initiatives, focusing on strategic partnerships and market expansion. With extensive experience in B2B sales and relationship management, he ensures our solutions reach the right audiences.</p>
+        <p><strong>Core skills:</strong> Partnership development, market analysis, negotiation, and client relations.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="modal-irfan" tabindex="-1" aria-labelledby="modalIrfanLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalIrfanLabel">Izza Sajid — Business Development Manager</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Izza Sajid leads our business development initiatives, focusing on strategic partnerships and market expansion. With extensive experience in B2B sales and relationship management, she ensures our solutions reach the right audiences.</p>
+        <p><strong>Core skills:</strong> Partnership development, market analysis, negotiation, and client relations.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AOS initialization -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 800,
+    easing: 'ease-in-out',
+    once: true,
+    mirror: false
+  });
+</script>
+{% endblock %}
